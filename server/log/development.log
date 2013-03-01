@@ -1,0 +1,12 @@
+
+
+Started GET "/assets/rails.png" for 127.0.0.1 at 2013-03-02 10:12:54 +1100
+Connecting to database specified by DATABASE_URL
+Served asset /rails.png - 304 Not Modified (51ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-03-02 10:20:27 +1100
+Connecting to database specified by DATABASE_URL
+Processing by DashboardController#welcome as HTML
+  Rendered dashboard/welcome.html.erb within layouts/application (88.1ms)
+Completed 200 OK in 379ms (Views: 378.2ms | ActiveRecord: 0.0ms)
