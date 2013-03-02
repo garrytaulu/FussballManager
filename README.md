@@ -27,10 +27,11 @@ with Ruby 1.9.2, so it's probably safe to get that version (it's also the verion
 ### Information
 
 Once your environment is setup you can start devloping. First things first, clone the git repo and run the app to make sure it works. You can do this
-by running the following two commands:
+by running the following three commands:
 
 ```
 git clone https://github.com/iamgarry/FussballManager.git
+cd FussballManager
 rails server
 ```
 
@@ -46,24 +47,24 @@ frontend (AngluarJS) code. The root dir has attempted to be kept as clean as pos
 * client/ - Contains frontend code
 * .gitignore - Standard git ignore
 * Gemfile - Ruby's dependancy managment
-* Gemfile.lock - Required for Heroku deployment
+* Gemfile.lock - Specifies which gem versions where installed (required for Heroku deployment)
 * Procfile - Heroku's deployment file, tells Heroku how to start the app
 * README.md - This file
 
 Notes:
 
-To create a new Rails application, you use the command `rails new *dir*` which creates a full project scaffold. This scaffold references various config files that
+To create a new Rails application, you use the command `rails new <dir>` which creates a full project scaffold. This scaffold references various config files that
 are required to start the application correctly. In order for us to have the Rails app under the 'server' dir, and still be runnable by Heroku, we need the 'script'
-dir in the root AND we need to modify the 'script/rails' file to reference the new config file location., i.e.:
+dir in the root AND we need to modify the 'script/rails' file to reference the new config file location, i.e.:
 
 ```
 APP_PATH = File.expand_path('../../config/application',  __FILE__)
 require File.expand_path('../../config/boot',  __FILE__)
 ```
 
-needs to be changed to:
+needs to be changed to (changes are surounded by `{}`):
 
 ```
-APP_PATH = File.expand_path('../../**server/**config/application',  __FILE__)
-require File.expand_path('../../**server/**config/boot',  __FILE__)
+APP_PATH = File.expand_path('../../{server}config/application',  __FILE__)
+require File.expand_path('../../{server/}config/boot',  __FILE__)
 ```
