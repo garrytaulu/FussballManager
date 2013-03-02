@@ -19,8 +19,9 @@ This project uses the Ruby on Rails framework for its backend, and it deploys to
 To develop this project you will need to setup an environment with Ruby, Rails, Heroku and PostgreSQL. The initial project has been created 
 with Ruby 1.9.2, so it's probably safe to get that version (it's also the verion that the Heroku tutorial uses). Links are provided below:
 
-* Ruby/Rails: http://rubyonrails.org/download, p.s. you may also need the DevKit (I did), you can find it here: http://rubyinstaller.org/downloads/ 
- (located under the heading Development Kit) and instructions for installing it are here: https://github.com/oneclick/rubyinstaller/wiki/development-kit
+* Ruby/Rails: http://rubyonrails.org/download
+* Ruby DevKit (tdm version for Ruby 1.9.*): http://rubyinstaller.org/downloads/ (located under the heading Development Kit)
+  and instructions for installing it: https://github.com/oneclick/rubyinstaller/wiki/development-kit
 * Heroku Toolbelt: https://toolbelt.heroku.com/
 * PostgreSQL: http://www.postgresql.org/download/
 
