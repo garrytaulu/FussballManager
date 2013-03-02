@@ -10,7 +10,7 @@ http://gemworld.herokuapp.com
 The API specification can be found here:
 http://goo.gl/10EmT
 
-## Project setup/information
+## Project setup/structure
 
 This project uses the Ruby on Rails framework for its backend, and it deploys to Heroku.
 
@@ -24,20 +24,17 @@ with Ruby 1.9.2, so it's probably safe to get that version (it's also the verion
 * Heroku Toolbelt: https://toolbelt.heroku.com/
 * PostgreSQL: http://www.postgresql.org/download/
 
-### Information
-
 Once your environment is setup you can start devloping. First things first, clone the git repo and run the app to make sure it works. You can do this
-by running the following three commands:
+by running the following commands:
 
-```
-git clone https://github.com/iamgarry/FussballManager.git
-cd FussballManager
-rails server
-```
+1. `git clone https://github.com/iamgarry/FussballManager.git`
+2. `cd FussballManager`
+3. `bundle install` (This may not be required - or only requried once per machine)
+4. `rails server`
 
 This should start the application and make it available at http://localhost:3000.
 
-#### Project Structure
+### Project Structure
 
 The idea is to have two top level folders called 'server' and 'client'. 'server' will contain all the backend (Rails) code, and 'client' will contain the
 frontend (AngluarJS) code. The root dir has attempted to be kept as clean as possible, and a description of each top level file/folder follows:
@@ -51,7 +48,7 @@ frontend (AngluarJS) code. The root dir has attempted to be kept as clean as pos
 * Procfile - Heroku's deployment file, tells Heroku how to start the app
 * README.md - This file
 
-Notes:
+**Notes:**
 
 To create a new Rails application, you use the command `rails new <dir>` which creates a full project scaffold. This scaffold references various config files that
 are required to start the application correctly. In order for us to have the Rails app under the 'server' dir, and still be runnable by Heroku, we need the 'script'
@@ -68,3 +65,11 @@ needs to be changed to (changes are surounded by `{}`):
 APP_PATH = File.expand_path('../../{server}config/application',  __FILE__)
 require File.expand_path('../../{server/}config/boot',  __FILE__)
 ```
+
+## Getting Started
+
+This section should just be a place where people can put useful links to do with any new technology (Rails, AngluarJS, Heroku)
+
+### Rails
+
+* Rails command line guide (creating an app, code generation, starting a server, etc): http://guides.rubyonrails.org/command_line.html  
