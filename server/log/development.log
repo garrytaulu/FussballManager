@@ -10,3 +10,22 @@ Connecting to database specified by DATABASE_URL
 Processing by DashboardController#welcome as HTML
   Rendered dashboard/welcome.html.erb within layouts/application (88.1ms)
 Completed 200 OK in 379ms (Views: 378.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-03-02 11:20:43 +1100
+Connecting to database specified by DATABASE_URL
+Processing by DashboardController#welcome as HTML
+  Rendered dashboard/welcome.html.erb within layouts/application (80.1ms)
+Completed 200 OK in 335ms (Views: 334.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-03-02 11:22:57 +1100
+Processing by DashboardController#welcome as HTML
+  Rendered dashboard/welcome.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 8ms (Views: 7.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-03-02 11:24:11 +1100
+Processing by DashboardController#welcome as HTML
+  Rendered dashboard/welcome.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 8ms (Views: 8.0ms | ActiveRecord: 0.0ms)
