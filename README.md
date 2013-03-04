@@ -32,10 +32,10 @@ with Ruby 1.9.2, so it's probably safe to get that version (it's also the versio
 In order for the app to run properly, you will need to set up a database and an environment variable.
 Follow these steps to set up an initial database, which we'll call *fussballManager*:
 
-1) Run the PostgreSQL Admin Console (on windows 8 64-bit its located at: C:\Program Files\Postgres\9.2\bin\pgAdmin3.exe)
-2) Click on your local database (it should have a red cross on it) and enter your password
-3) Right-click on **Databases** and click **New Database...**
-4) Type *fussballManager* in the **Name** field and click Ok
+1. Run the PostgreSQL Admin Console (on windows 8 64-bit its located at: C:\Program Files\Postgres\9.2\bin\pgAdmin3.exe)
+2. Click on your local database (it should have a red cross on it) and enter your password
+3. Right-click on **Databases** and click **New Database...**
+4. Type *fussballManager* in the **Name** field and click Ok
 
 Now that you have an initial database set up, you have to configure an Environment Variable for Rails to pick it up.
 Create an Environment Variable with name = **DATABASE_URL** and value = postgres://*username*:*password*@localhost:*port*/fussballManager,
