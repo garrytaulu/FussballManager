@@ -35,37 +35,16 @@ by running the following commands:
 
 This should start the application and make it available at http://localhost:3000.
 
-### Project Structure
+### Structure
 
-The idea is to have two top level folders called 'server' and 'client'. 'server' will contain all the backend (Rails) code, and 'client' will contain the
-frontend (AngluarJS) code. The root dir has attempted to be kept as clean as possible, and a description of each top level file/folder follows:
+The Rails framework sets up a project template for us to use, which we will follow as closly as possible. Directories/files of note are listed below:
 
-* script/ - This dir contains the 'rails' script that is referenced in the Procfile (and in the command 'rails server'), *See below*
-* server/ - Contains backend code
-* client/ - Contains frontend code
-* .gitignore - Standard git ignore
+* app/, db/, log/, etc (every top level directory besides *public/*) - These dirs contains the bulk of the Rails backend app (the REST endpoints, REST documenations, etc)
+* public/ - This dir contains the frontend app (the AngluarJS app, all client code). The idea is to keep this de-coupled 
+			from the backend app completely (it's only communcation should be through the REST API)
 * Gemfile - Ruby's dependancy managment
 * Gemfile.lock - Specifies which gem versions where installed (required for Heroku deployment)
 * Procfile - Heroku's deployment file, tells Heroku how to start the app
-* README.md - This file
-
-**Notes:**
-
-To create a new Rails application, you use the command `rails new <dir>` which creates a full project scaffold. This scaffold references various config files that
-are required to start the application correctly. In order for us to have the Rails app under the 'server' dir, and still be runnable by Heroku, we need the 'script'
-dir in the root AND we need to modify the 'script/rails' file to reference the new config file location, i.e.:
-
-```
-APP_PATH = File.expand_path('../../config/application',  __FILE__)
-require File.expand_path('../../config/boot',  __FILE__)
-```
-
-needs to be changed to (changes are surounded by `{}`):
-
-```
-APP_PATH = File.expand_path('../../{server}config/application',  __FILE__)
-require File.expand_path('../../{server/}config/boot',  __FILE__)
-```
 
 ## Getting Started
 
