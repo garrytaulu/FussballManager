@@ -42,6 +42,10 @@ Create an Environment Variable with name = **DATABASE_URL** and value = postgres
 where *username* is your username, *password* is your password, and *port* is the port the database is running on (note that
 this defaults to 5432 during installation).
 
+**Note:** The file */config/database.yaml* has been configured to connect to a postgres database for the development profile.
+You can use this file to get Rails to connect to the database instead of using the DATABASE_URL environment variable. Navigate
+to the file and fill out the missing values, then run the server and it should be all good.
+
 #### Clone and Run
 
 Once your environment is setup you can start developing. First things first, clone the git repo and run the app to make sure it works. You can do this
