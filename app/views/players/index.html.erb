@@ -1,0 +1,33 @@
+<h1>Listing players</h1>
+
+<% if  @players.count() == 0 %>
+    <p>There are not players.</p>
+<% else %>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Nickname</th>
+        <th>Avatar</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <% @players.each do |player| %>
+          <tr>
+            <td><%= player.id %></td>
+            <td><%= player.name %></td>
+            <td><%= player.nickname %></td>
+            <td><%= player.avatar %></td>
+            <td><%= link_to 'Show', player %></td>
+            <td><%= link_to 'Edit', edit_player_path(player) %></td>
+            <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
+
+<br />
+
+<%= link_to 'New Player', new_player_path %>
