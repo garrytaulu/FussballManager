@@ -5,12 +5,7 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
-
-    @teams.each do |team|
-      team[:offensive_player] = Player.find(team.offense)
-      team[:defensive_player] = Player.find(team.defense)
-    end
+    @teams = Team.all(:joins => [:offense, :defense])
 
     respond_with @teams
   end
@@ -18,9 +13,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    @team = Team.find(params[:id])
-    @team[:offensive_player] = Player.find(@team.offense)
-    @team[:defensive_player] = Player.find(@team.defense)
+    @team = Team.find(params[:id], :joins => [:offense, :defense])
 
     respond_with @team
   end

@@ -7,18 +7,18 @@
 
 <p>
   <b>Offense:</b>
-  <%= @team.offensive_player.name %>
+  <%= @team.offense.name %>
   <br/>
   <b>Offense Nick:</b>
-  <%= @team.offensive_player.nickname %>
+  <%= @team.offense.nickname %>
 </p>
 
 <p>
   <b>Defense:</b>
-  <%= @team.defensive_player.name %>
+  <%= @team.defense.name %>
   <br/>
   <b>Defense Nick:</b>
-  <%= @team.defensive_player.nickname %>
+  <%= @team.defense.nickname %>
 </p>
 
 <%= link_to 'New', new_team_path %> |

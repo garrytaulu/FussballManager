@@ -1,5 +1,5 @@
 <h1>Listing teams</h1>
-<% if @teams.count() == 0 %>
+<% if @teams == 0 %>
     <p>There are no teams.</p>
 <% else %>
     <table>
@@ -15,8 +15,8 @@
     <% @teams.each do |team| %>
       <tr>
         <td><%= team.id %></td>
-        <td><%= team.offensive_player.name %></td>
-        <td><%= team.defensive_player.name %></td>
+        <td><%= team.offense.name %></td>
+        <td><%= team.defense.name %></td>
         <td><%= link_to 'Show', team %></td>
         <td><%= link_to 'Edit', edit_team_path(team) %></td>
         <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
