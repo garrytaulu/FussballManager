@@ -1,10 +1,11 @@
 <h1>Listing teams</h1>
-<% if @teams == 0 %>
+<% if @teams.count() == 0 %>
     <p>There are no teams.</p>
 <% else %>
     <table>
       <tr>
         <th>Id</th>
+        <th>Name</th>
         <th>Offense</th>
         <th>Defense</th>
         <th></th>
@@ -15,6 +16,7 @@
     <% @teams.each do |team| %>
       <tr>
         <td><%= team.id %></td>
+        <td><%= team.name %></td>
         <td><%= team.offense.name %></td>
         <td><%= team.defense.name %></td>
         <td><%= link_to 'Show', team %></td>

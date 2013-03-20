@@ -1,0 +1,17 @@
+<%= form_for(@game) do |f| %>
+  <% if @teams.count() > 1 %>
+    <div class="field">
+      <%= f.label :selected_blue_team %><br />
+      <%= collection_select(:game, :selected_blue_team, @teams, :id, :name, :prompt => 'Select team')  %>
+    </div>
+    <div class="field">
+      <%= f.label :selected_red_team %><br />
+      <%= collection_select(:game, :selected_red_team, @teams, :id, :name, :prompt => 'Select team')  %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% else %>
+    <p>There's not enough teams. Please make some teams before creating a game.</p>
+  <% end %>
+<% end %>

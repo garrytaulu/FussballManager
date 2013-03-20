@@ -1,0 +1,47 @@
+<h1>Listing games</h1>
+
+<% if @games.count() == 0 %>
+    <p>There are not games.</p>
+<% end %>
+
+<% @games.each do |game| %>
+
+    <h4>Game <%= game.id %></h4>
+
+    <table>
+      <tr>
+        <th>Team</th>
+        <th>Offense</th>
+        <th>Defense</th>
+      </tr>
+      <tr>
+        <td><%= game.blueTeam.name %></td>
+        <td><%= game.blueTeam.offense.name %></td>
+        <td><%= game.blueTeam.defense.name %></td>
+      </tr>
+    </table>
+    <h3>VS</h3>
+    <table>
+      <tr>
+        <th>Team</th>
+        <th>Offense</th>
+        <th>Defense</th>
+      </tr>
+      <tr>
+        <td><%= game.redTeam.name %></td>
+        <td><%= game.redTeam.offense.name %></td>
+        <td><%= game.redTeam.defense.name %></td>
+      </tr>
+    </table>
+<br/>
+    <span><%= link_to 'Show', game %></span>
+    <span><%= link_to 'Edit', edit_game_path(game) %></span>
+    <span><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+
+    <hr/>
+
+<% end %>
+
+<br />
+
+<%= link_to 'New Game', new_game_path %>

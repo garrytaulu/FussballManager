@@ -2,12 +2,10 @@
 
 one:
   id: 1
-  offense: 1
-  defense: 1
-  name: 'test-1'
+  blueTeam: 1
+  redTeam: 1
 
 two:
   id: 1
-  offense: 1
-  defense: 1
-  name: 'test21'
+  blueTeam: 1
+  redTeam: 1
