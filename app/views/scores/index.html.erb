@@ -1,0 +1,30 @@
+<h1>Listing scores</h1>
+
+<% if @scores.count() > 0 %>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Game</th>
+        <th>Player</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <% @scores.each do |score| %>
+          <tr>
+            <td><%= score.id %></td>
+            <td><%= score.game.id %></td>
+            <td><%= score.player.name %></td>
+            <td><%= link_to 'Show', score %></td>
+            <td><%= link_to 'Edit', edit_score_path(score) %></td>
+            <td><%= link_to 'Destroy', score, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+      <% end %>
+    </table>
+<% else %>
+    <p>There are no scores.</p>
+<% end %>
+<br />
+
+<%= link_to 'New Score', new_score_path %>

@@ -1,0 +1,17 @@
+<% if @games.count() > 0 %>
+    <%= form_for(@score) do |f| %>
+        <div class="field">
+          <%= f.label :game %><br />
+          <%= collection_select(:score, :selected_game, @games, :id, :id, :prompt => 'Select a game')  %>
+        </div>
+        <div class="field">
+          <%= f.label :player %><br />
+          <%= collection_select(:score, :selected_player, @players, :id, :name, :prompt => 'Select player')  %>
+        </div>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+    <% end %>
+<% else %>
+    <p>There are not games to score. Please create a game to start scoring.</p>
+<% end %>

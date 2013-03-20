@@ -4,6 +4,7 @@ FussballManager::Application.routes.draw do
     resources :players
     resources :teams
     resources :games
+    resources :scores
   end
 
   # The priority is based upon order of creation:
