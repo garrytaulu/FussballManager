@@ -4,7 +4,6 @@ class CreateTeams < ActiveRecord::Migration
       t.integer :id
       t.integer :offense
       t.integer :defense
-      t.string :name
 
       t.timestamps
     end
