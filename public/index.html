@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html ng-app="fm">
 <head>
-    <title></title>
+    <title>Fussball Manager</title>
 </head>
 <body ng-controller="MainCtrl">
 
 <h1>Index of FM app</h1>
 
-<p>{{helloWorld}}</p>
+<div ng-controller="PlayerDetailCtrl">
 
+    <div>
+        <button type="button" ng-click="create()">Create</button>
+    </div>
+
+    <form name="playerForm" ng-submit="save()" ng-hide="playerEdit == null">
+        <fieldset>
+            <div>
+                <input type="text" ng-model="playerEdit.name" required/>
+            </div>
+            <div>
+                <input type="text" ng-model="playerEdit.nickname" required/>
+            </div>
+            <div>
+                <input type="text" ng-model="player.avatar" required ng-pattern="/.png$/"/>
+            </div>
+            <button type="submit">Save</button>
+            <button type="button" ng-click="cancel()">Cancel</button>
+        </fieldset>
+    </form>
+
+    <ol>
+        <li ng-repeat="player in players">
+            <div>{{ player | playerDisplay }}</div>
+            <a title="Edit" href="" ng-click="edit($index)">Edit</a>
+            <a title="Delete" href="" ng-click="delete($index)">Delete</a>
+        </li>
+    </ol>
+</div>
+
+<script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.js"></script>
 <script type="text/javascript" src="lib/angular-resource.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
