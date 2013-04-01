@@ -22,7 +22,7 @@
                 <input type="text" ng-model="playerEdit.nickname" required/>
             </div>
             <div>
-                <input type="text" ng-model="player.avatar" required ng-pattern="/.png$/"/>
+                <input type="text" ng-model="playerEdit.avatar" required ng-pattern="/.png$/"/>
             </div>
             <button type="submit">Save</button>
             <button type="button" ng-click="cancel()">Cancel</button>
@@ -33,13 +33,13 @@
         <li ng-repeat="player in players">
             <div>{{ player | playerDisplay }}</div>
             <a title="Edit" href="" ng-click="edit($index)">Edit</a>
-            <a title="Delete" href="" ng-click="delete($index)">Delete</a>
+            <a title="Delete" href="" ng-click="delete(player)">Delete</a>
         </li>
     </ol>
 </div>
 
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.js"></script>
+<script type="text/javascript" src="lib/angular.js"></script>
 <script type="text/javascript" src="lib/angular-resource.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/controllers.js"></script>

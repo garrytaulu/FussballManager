@@ -1,7 +1,7 @@
 'use strict';
 
-function MainCtrl($scope, Player) {
-
+function MainCtrl($scope, Player)
+{
     $scope.players = [];
 
     Player.query(function(result) {
@@ -11,8 +11,8 @@ function MainCtrl($scope, Player) {
 
 MainCtrl.$inject = ['$scope', 'Player'];
 
-function PlayerDetailCtrl($scope, Player, ApiUtility) {
-
+function PlayerDetailCtrl($scope, Player, ApiUtility)
+{
     $scope.master = {};
     $scope.playerEdit = null;
 
@@ -26,9 +26,7 @@ function PlayerDetailCtrl($scope, Player, ApiUtility) {
     };
 
     $scope.save = function() {
-
         ApiUtility.upsert($scope.playerEdit, function(type, updatedResource) {
-
             if (type == 'create') {
                 $scope.players.push(updatedResource);
             } else {
@@ -40,17 +38,26 @@ function PlayerDetailCtrl($scope, Player, ApiUtility) {
 
             $scope.cancel();
         });
-
     };
 
-    $scope.delete = function(index) {
-        console.log('not implemented', index);
+    $scope.delete = function(player) {
+        player['$delete'](function() {
+            // TODO: There seems there should be a better way of doing this (more angular-y); i want angular to register that 'player' is now deleted
+            var newPlayers = [];
+
+            $scope.players.forEach(function(p) {
+                if (p.id != player.id) {
+                    newPlayers.push(p);
+                }
+            });
+
+            $scope.players = newPlayers;
+        });
     };
 
     $scope.cancel = function() {
         $scope.playerEdit = null;
     };
-
 }
 
 PlayerDetailCtrl.$inject = ['$scope', 'Player', 'ApiUtility'];
