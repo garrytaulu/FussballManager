@@ -40,8 +40,8 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new
     @team.name = params[:team][:name]
-    @team.offense = Player.find(params[:team][:selected_offense])
-    @team.defense = Player.find(params[:team][:selected_defense])
+    @team.offense = Player.find(params[:team][:offense])
+    @team.defense = Player.find(params[:team][:defense])
 
     @team.save
 
@@ -54,8 +54,8 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
 
     @team.name = params[:team][:name]
-    @team.offense = Player.find(params[:team][:selected_offense])
-    @team.defense = Player.find(params[:team][:selected_defense])
+    @team.offense = Player.find(params[:team][:offense])
+    @team.defense = Player.find(params[:team][:defense])
 
     @team.save
 
