@@ -59,18 +59,33 @@ function PlayerDetailCtrl($scope, Player, ApiUtility)
 
 PlayerDetailCtrl.$inject = ['$scope', 'Player', 'ApiUtility'];
 
-function TeamDetailCtrl($scope, Team, ApiUtility)
+function TeamDetailCtrl($scope, Team, Player, ApiUtility)
 {
     $scope.master = {};
     $scope.teamEdit = null;
 
     $scope.create = function() {
+        Player.query(function(players) {
+            $scope.availablePlayers = players;
+        });
+
         $scope.teamEdit = new Team();
     };
 
     $scope.edit = function(index) {
         $scope.master = $scope.teams[index];
         $scope.teamEdit = angular.copy($scope.master);
+
+        // offense and defense are complex objs at this point,
+        // however the select control (and the server) require
+        // them to be IDs, so we flatten them out here
+        $scope.teamEdit.offense = $scope.teamEdit.offense.id;
+        $scope.teamEdit.defense = $scope.teamEdit.defense.id;
+
+        // Fill in the available players
+        Player.query(function(players) {
+            $scope.availablePlayers = players;
+        });
     };
 
     $scope.save = function() {
@@ -99,4 +114,4 @@ function TeamDetailCtrl($scope, Team, ApiUtility)
     };
 }
 
-TeamDetailCtrl.$inject = ['$scope', 'Team', 'ApiUtility'];
+TeamDetailCtrl.$inject = ['$scope', 'Team', 'Player', 'ApiUtility'];
