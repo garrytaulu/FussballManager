@@ -1,14 +1,12 @@
 'use strict';
 
-function MainCtrl($scope, Player, Team, Game)
+function MainCtrl($scope, Player, Game)
 {
     $scope.players = [];
 
     Player.query(function(result) {
         $scope.players = result;
     });
-
-    $scope.teams = [];
 
     $scope.games = [];
 
@@ -17,7 +15,7 @@ function MainCtrl($scope, Player, Team, Game)
     });
 }
 
-MainCtrl.$inject = ['$scope', 'Player', 'Team', 'Game'];
+MainCtrl.$inject = ['$scope', 'Player', 'Game'];
 
 /* *********************** */
 /* ** PLAYER ************* */
@@ -94,9 +92,9 @@ function GameDetailCtrl($scope, Player, Game, ApiUtility)
         $scope.master = $scope.games[index];
         $scope.gameEdit = angular.copy($scope.master);
 
-        // blueTeam and redTeam are complex objs at this point,
-        // however the select control (and the server) require
-        // them to be IDs, so we flatten them out here
+        // blueAttacker, blueDefender, redAttacker and redDefender are
+        // complex objs at this point, however the select control
+        // (and the server) require them to be IDs, so we flatten them out here
         $scope.gameEdit.blueAttacker = $scope.gameEdit.blueAttacker.id;
         $scope.gameEdit.blueDefender = $scope.gameEdit.blueDefender.id;
         $scope.gameEdit.redAttacker  = $scope.gameEdit.redAttacker.id;
