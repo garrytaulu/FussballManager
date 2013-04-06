@@ -1,6 +1,6 @@
 'use strict';
 
-function MainCtrl($scope, Player, Team)
+function MainCtrl($scope, Player, Team, Game)
 {
     $scope.players = [];
 
@@ -13,10 +13,19 @@ function MainCtrl($scope, Player, Team)
     Team.query(function(result) {
         $scope.teams = result;
     });
+
+    $scope.games = [];
+
+    Game.query(function(result) {
+        $scope.games = result;
+    });
 }
 
-MainCtrl.$inject = ['$scope', 'Player', 'Team'];
+MainCtrl.$inject = ['$scope', 'Player', 'Team', 'Game'];
 
+/* *********************** */
+/* ** PLAYER *************** */
+/* *********************** */
 function PlayerDetailCtrl($scope, Player, ApiUtility)
 {
     $scope.master = {};
@@ -59,6 +68,9 @@ function PlayerDetailCtrl($scope, Player, ApiUtility)
 
 PlayerDetailCtrl.$inject = ['$scope', 'Player', 'ApiUtility'];
 
+/* *********************** */
+/* ** TEAM *************** */
+/* *********************** */
 function TeamDetailCtrl($scope, Team, Player, ApiUtility)
 {
     $scope.master = {};
@@ -115,3 +127,70 @@ function TeamDetailCtrl($scope, Team, Player, ApiUtility)
 }
 
 TeamDetailCtrl.$inject = ['$scope', 'Team', 'Player', 'ApiUtility'];
+
+/* *********************** */
+/* ** GAME *************** */
+/* *********************** */
+function GameDetailCtrl($scope, Player, Team, Game, ApiUtility)
+{
+    $scope.master = {};
+    $scope.gameEdit = null;
+
+    $scope.create = function() {
+//        Player.query(function(players) {
+//            $scope.availablePlayers = players;
+//        });
+        Team.query(function(teams) {
+            $scope.availableTeams = teams;
+        });
+
+        $scope.gameEdit = new Game();
+    };
+
+    $scope.edit = function(index) {
+        $scope.master = $scope.games[index];
+        $scope.gameEdit = angular.copy($scope.master);
+
+        // blueTeam and redTeam are complex objs at this point,
+        // however the select control (and the server) require
+        // them to be IDs, so we flatten them out here
+        $scope.gameEdit.blueTeam = $scope.gameEdit.blueTeam.id;
+        $scope.gameEdit.redTeam  = $scope.gameEdit.redTeam.id;
+
+        // Fill in the available players
+//        Player.query(function(players) {
+//            $scope.availablePlayers = players;
+//        });
+
+        Team.query(function(teams) {
+            $scope.availableTeams = teams;
+        });
+    };
+
+    $scope.save = function() {
+        ApiUtility.upsert($scope.gameEdit, function(type, updatedResource) {
+            if (type == 'create') {
+                $scope.games.push(updatedResource);
+            } else {
+                var index = $scope.games.indexOf($scope.master);
+                if (index > -1) {
+                    $scope.games[index] = updatedResource;
+                }
+            }
+
+            $scope.cancel();
+        });
+    };
+
+    $scope.delete = function(index, game) {
+        game['$delete'](function() {
+            $scope.games.splice(index, 1);
+        });
+    };
+
+    $scope.cancel = function() {
+        $scope.gameEdit = null;
+    };
+}
+
+GameDetailCtrl.$inject = ['$scope', 'Player', 'Team', 'Game', 'ApiUtility'];

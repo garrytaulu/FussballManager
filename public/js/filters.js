@@ -27,7 +27,7 @@ angular.module('fm.filters', [])
     }])
 
     /**
-      * Returns the player with the following format.
+      * Returns the Team with the following format.
       *
       * {team.name} - Offense: {team.offense.nickname}, Defense: {team.defense.nickname}
       *
@@ -41,6 +41,27 @@ angular.module('fm.filters', [])
 
             if (angular.isDefined(team)) {
                 result = team.name + " - Offense: " + team.offense.nickname + ", Defense: " + team.defense.nickname;
+            }
+
+            return result;
+        };
+    })
+
+    /**
+      * Returns the Game with the following format.
+      *
+      * Blue Team: {game.blueTeam.name} VS Red Team: {game.redTeam.name}
+      *
+      * Dependencies:
+      *
+      * $filter
+      */
+    .filter('gameDisplay', function() {
+        return function(game) {
+            var result = "";
+
+            if (angular.isDefined(game)) {
+                result = "Blue Team: " + game.blueTeam.name + " VS Red Team: " + game.redTeam.name;
             }
 
             return result;
