@@ -10,10 +10,6 @@ function MainCtrl($scope, Player, Team, Game)
 
     $scope.teams = [];
 
-//    Team.query(function(result) {
-//        $scope.teams = result;
-//    });
-
     $scope.games = [];
 
     Game.query(function(result) {
@@ -24,7 +20,7 @@ function MainCtrl($scope, Player, Team, Game)
 MainCtrl.$inject = ['$scope', 'Player', 'Team', 'Game'];
 
 /* *********************** */
-/* ** PLAYER *************** */
+/* ** PLAYER ************* */
 /* *********************** */
 function PlayerDetailCtrl($scope, Player, ApiUtility)
 {
@@ -90,9 +86,6 @@ function GameDetailCtrl($scope, Player, Game, ApiUtility)
         Player.query(function(players) {
             $scope.availablePlayers = players;
         });
-//        Team.query(function(teams) {
-//            $scope.availableTeams = teams;
-//        });
 
         $scope.gameEdit = new Game();
     };
@@ -113,10 +106,6 @@ function GameDetailCtrl($scope, Player, Game, ApiUtility)
         Player.query(function(players) {
             $scope.availablePlayers = players;
         });
-
-//        Team.query(function(teams) {
-//            $scope.availableTeams = teams;
-//        });
     };
 
     $scope.save = function() {
