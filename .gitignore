@@ -16,3 +16,6 @@
 
 # Ignore IDE files
 .idea
+
+# mac temp files
+*.DS_Store
