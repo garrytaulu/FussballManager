@@ -1,30 +1,34 @@
-<h1>Listing scores</h1>
+<h1>Game Scores</h1>
 
-<% if @scores.count() > 0 %>
-    <table>
-      <tr>
-        <th>Id</th>
-        <th>Game</th>
-        <th>Player</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-
-      <% @scores.each do |score| %>
-          <tr>
-            <td><%= score.id %></td>
-            <td><%= score.game.id %></td>
-            <td><%= score.player.name %></td>
-            <td><%= link_to 'Show', score %></td>
-            <td><%= link_to 'Edit', edit_score_path(score) %></td>
-            <td><%= link_to 'Destroy', score, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-      <% end %>
-    </table>
+<% if @scores.count() == 0 %>
+    <p>There are no scores. Would you like to <%= link_to 'create', new_game_score_path %> one?</p>
 <% else %>
-    <p>There are no scores.</p>
-<% end %>
-<br />
+    <table>
+        <tr>
+          <th>Id</th>
+          <th>Game</th>
+          <th>Player</th>
+          <th>Own goal</th>
+          <th>Team</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
 
-<%= link_to 'New Score', new_score_path %>
+        <% @scores.each do |score| %>
+            <tr>
+              <td><%= score.id %></td>
+              <td><%= score.game.id %></td>
+              <td><%= score.player.name %></td>
+              <td><%= score.own_goal && 'Yes' || 'No' %></td>
+              <td><%= score.team %></td>
+              <td><%= link_to 'Show', game_score_path(score.game, score) %></td>
+              <td><%= link_to 'Edit', edit_game_score_path(score.game, score) %></td>
+              <td><%= link_to 'Destroy', [score.game, score], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+        <% end %>
+    </table>
+    <br />
+
+    <%= link_to 'New Score', new_game_score_path %>
+<% end %>

@@ -7,14 +7,24 @@
 
 <p>
   <b>Game:</b>
-  <%= @score.game.id %>
+  <%= @score.game && @score.game.id || '' %>
 </p>
 
 <p>
   <b>Player:</b>
-  <%= @score.player.name %>
+  <%= @score.player && @score.player.name || '' %>
 </p>
 
-<%= link_to 'New', new_score_path %> |
-<%= link_to 'Edit', edit_score_path(@score) %> |
-<%= link_to 'Back', scores_path %>
+<p>
+  <b>Own goal:</b>
+  <%= @score.own_goal && 'Yes' || 'No' %>
+</p>
+
+<p>
+  <b>Team:</b>
+  <%= @score.team || '' %>
+</p>
+
+<%= link_to 'New', new_game_score_path(@score.game, @score) %> |
+<%= link_to 'Edit', edit_game_score_path(@score.game, @score) %> |
+<%= link_to 'Back', game_scores_path %>

@@ -1,7 +1,7 @@
-<h1>Listing players</h1>
+<h1>Players</h1>
 
 <% if @players.count() == 0 %>
-    <p>There are no players.</p>
+    <p>There are no players. Would you like to <%= link_to 'create', new_player_path %> one?</p>
 <% else %>
     <table>
       <tr>
@@ -15,19 +15,18 @@
       </tr>
 
       <% @players.each do |player| %>
-          <tr>
-            <td><%= player.id %></td>
-            <td><%= player.name %></td>
-            <td><%= player.nickname %></td>
-            <td><%= player.avatar %></td>
-            <td><%= link_to 'Show', player %></td>
-            <td><%= link_to 'Edit', edit_player_path(player) %></td>
-            <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
+            <tr>
+                <td><%= player.id %></td>
+                <td><%= player.name %></td>
+                <td><%= player.nickname %></td>
+                <td><%= player.avatar %></td>
+                <td><%= link_to 'Show', player %></td>
+                <td><%= link_to 'Edit', edit_player_path(player) %></td>
+                <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
       <% end %>
     </table>
+    <br />
+
+    <%= link_to 'New Player', new_player_path %>
 <% end %>
-
-<br />
-
-<%= link_to 'New Player', new_player_path %>

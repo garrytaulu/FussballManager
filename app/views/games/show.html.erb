@@ -6,31 +6,22 @@
 </p>
 
 <p>
-  <b>Blue Team</b>
+  <b>Blue Attacker: </b>
+  <%= @game.blueAttacker.name %>
   <br/>
-  <b>Team Name:</b>
-  <%= @game.blueTeam.name %>
-  <br/>
-  <b>Offense</b>
-  <%= @game.blueTeam.offense.name %>
-  <br/>
-  <b>Defense</b>
-  <%= @game.blueTeam.defense.name %>
+  <b>Blue Defender: </b>
+  <%= @game.blueDefender.name %>
 </p>
 
 <p>
-  <b>Red Team</b>
+  <b>Red Attacker: </b>
+  <%= @game.redAttacker.name %>
   <br/>
-  <b>Team Name:</b>
-  <%= @game.redTeam.name %>
-  <br/>
-  <b>Offense:</b>
-  <%= @game.redTeam.offense.name %>
-  <br/>
-  <b>Defense:</b>
-  <%= @game.redTeam.defense.name %>
+  <b>Red Defender: </b>
+  <%= @game.redDefender.name %>
 </p>
 
 <%= link_to 'New', new_game_path %> |
 <%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Destroy', @game, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', games_path %>

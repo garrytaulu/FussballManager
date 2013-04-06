@@ -1,17 +1,30 @@
-<%= form_for(@game) do |f| %>
-  <% if @teams.count() > 1 %>
-    <div class="field">
-      <%= f.label :selected_blue_team %><br />
-      <%= collection_select(:game, :selected_blue_team, @teams, :id, :name, :prompt => 'Select team')  %>
-    </div>
-    <div class="field">
-      <%= f.label :selected_red_team %><br />
-      <%= collection_select(:game, :selected_red_team, @teams, :id, :name, :prompt => 'Select team')  %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  <% else %>
-    <p>There's not enough teams. Please make some teams before creating a game.</p>
-  <% end %>
+<% if @players_count >= 4 %>
+    <%= form_for(@game) do |f| %>
+        <div class="field">
+          <%= f.label :blueAttacker, 'Blue Attacker:' %><br/>
+          <%= player_select(@game, :game, :blueAttacker)%>
+        </div>
+        <div class="field">
+          <%= f.label :blueDefender, 'Blue Defender:' %><br/>
+          <%= player_select(@game, :game, :blueDefender)%>
+        </div>
+        <div class="field">
+          <%= f.label :redAttacker, 'Red Attacker:' %><br/>
+          <%= player_select(@game, :game, :redAttacker)%>
+        </div>
+        <div class="field">
+          <%= f.label :redDefender, 'Red Defender:' %><br/>
+          <%= player_select(@game, :game, :redDefender)%>
+        </div>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+    <% end %>
+<% else %>
+    <p>
+      Currently there are <%= @players_count %><%= @players_count == 1 && ' player' || ' players' %>.
+      There must be a minimum of 4 players before a game can be created.
+    </p>
 <% end %>
+<%= link_to 'Back', games_path %>
+

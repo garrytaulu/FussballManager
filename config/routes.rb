@@ -2,9 +2,9 @@ FussballManager::Application.routes.draw do
 
   scope '/api' do
     resources :players
-    resources :teams
-    resources :games
-    resources :scores
+    resources :games do
+      resources :scores
+    end
   end
 
   # The priority is based upon order of creation:

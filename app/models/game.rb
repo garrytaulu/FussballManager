@@ -1,12 +1,10 @@
 class Game < ActiveRecord::Base
-  attr_accessible :blueTeam, :id, :redTeam
+  attr_accessible :id, :blueAttacker, :blueDefender, :redAttacker, :redDefender
 
-  belongs_to :blueTeam, :class_name => 'Team', :foreign_key => 'blueTeam'
-  belongs_to :redTeam, :class_name => 'Team', :foreign_key => 'redTeam'
+  belongs_to :blueAttacker, :class_name => 'Player', :foreign_key => 'blueAttacker'
+  belongs_to :blueDefender, :class_name => 'Player', :foreign_key => 'blueDefender'
+  belongs_to :redAttacker, :class_name => 'Player', :foreign_key => 'redAttacker'
+  belongs_to :redDefender, :class_name => 'Player', :foreign_key => 'redDefender'
 
   has_many :scores
-
-  # properties used for the selected state of the form drop downs
-  attr_accessor :selected_blue_team
-  attr_accessor :selected_red_team
 end

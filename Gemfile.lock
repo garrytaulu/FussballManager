@@ -81,6 +81,8 @@ GEM
     rake (10.0.3)
     rdoc (3.12.2)
       json (~> 1.4)
+    responders (0.9.3)
+      railties (~> 3.1)
     sass (3.2.6)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -110,5 +112,6 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 3.2.12)
+  responders
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)

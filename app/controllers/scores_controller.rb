@@ -2,62 +2,75 @@ class ScoresController < ApplicationController
 
   respond_to :html, :json, :xml
 
-  # GET /scores
-  # GET /scores.json
+  # GET games/1/scores
+  # GET games/1/scores.json
   def index
-    @scores = Score.all
+    @scores = Score.find_all_by_game(params[:game_id])
 
     respond_with @scores
   end
 
-  # GET /scores/1
-  # GET /scores/1.json
+  # GET games/1/scores/1
+  # GET games/1/scores/1.json
   def show
     @score = Score.find(params[:id])
 
     respond_with @score
   end
 
-  # GET /scores/new
-  # GET /scores/new.json
+  # GET games/1/scores/new
+  # GET games/1/scores/new.json
   def new
+    @game = Game.find(params[:game_id])
     @score = Score.new
-    @games = Game.all
-    @players = Player.all
   end
 
-  # GET /scores/1/edit
+  # GET games/1/scores/1/edit
   def edit
     @score = Score.find(params[:id])
-    @score.selected_game = @score.game.id
-    @score.selected_player = @score.player.id
-
-    @games = Game.all
-    @players = Player.all
+    @game = @score.game
   end
 
-  # POST /scores
-  # POST /scores.json
+  # POST games/1/scores
+  # POST games/1/scores.json
   def create
-    @score = Score.new()
-    @score.game = Game.find(params[:score][:selected_game])
-    @score.player = Player.find(params[:score][:selected_player])
+    @game = Game.find(params[:game_id])
+    @score = Score.new
+    @score.game = @game
+    @score.player = Player.find(params[:score][:player])
+    @score.own_goal = params[:score][:own_goal]
+
+    # work out which team scored
+    if @score.player.id == @score.game.blueAttacker.id ||
+       @score.player == @score.game.blueDefender.id
+      @score.team = 'blue'
+    else
+      @score.team = 'red'
+    end
 
     @score.save
 
-    respond_with @score
+    respond_with [@game, @score]
   end
 
-  # PUT /scores/1
-  # PUT /scores/1.json
+  # PUT games/1/scores/1
+  # PUT games/1/scores/1.json
   def update
     @score = Score.find(params[:id])
-    @score.game = Game.find(params[:score][:selected_game])
-    @score.player = Player.find(params[:score][:selected_player])
+    @score.player = Player.find(params[:score][:player])
+    @score.own_goal = params[:score][:own_goal]
+
+    # work out which team scored
+    if @score.player.id == @score.game.blueAttacker.id ||
+        @score.player == @score.game.blueDefender.id
+      @score.team = 'blue'
+    else
+      @score.team = 'red'
+    end
 
     @score.save
 
-    respond_with @score
+    respond_with [@score.game, @score]
   end
 
   # DELETE /scores/1
@@ -66,6 +79,6 @@ class ScoresController < ApplicationController
     @score = Score.find(params[:id])
     @score.destroy
 
-    respond_with @score
+    respond_with [@score.game, @score]
   end
 end

@@ -22,26 +22,24 @@ class GamesController < ApplicationController
   # GET /games/new.json
   def new
     @game = Game.new
-
-    @teams = Team.all
+    @players_count = Player.count
   end
 
   # GET /games/1/edit
   def edit
     @game = Game.find(params[:id])
-
-    @game.selected_blue_team = @game.blueTeam.id
-    @game.selected_red_team = @game.redTeam.id
-
-    @teams = Team.all
+    @players_count = Player.count
   end
 
   # POST /games
   # POST /games.json
   def create
     @game = Game.new
-    @game.blueTeam = Team.find(params[:game][:selected_blue_team])
-    @game.redTeam = Team.find(params[:game][:selected_red_team])
+
+    @game.blueAttacker = Player.find(params[:game][:blueAttacker])
+    @game.blueDefender = Player.find(params[:game][:blueDefender])
+    @game.redAttacker = Player.find(params[:game][:redAttacker])
+    @game.redDefender = Player.find(params[:game][:redDefender])
 
     @game.save
 
@@ -52,8 +50,11 @@ class GamesController < ApplicationController
   # PUT /games/1.json
   def update
     @game = Game.find(params[:id])
-    @game.blueTeam = Team.find(params[:game][:selected_blue_team])
-    @game.redTeam = Team.find(params[:game][:selected_red_team])
+
+    @game.blueAttacker = Player.find(params[:game][:blueAttacker])
+    @game.blueDefender = Player.find(params[:game][:blueDefender])
+    @game.redAttacker = Player.find(params[:game][:redAttacker])
+    @game.redDefender = Player.find(params[:game][:redDefender])
 
     @game.save
 
