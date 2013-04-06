@@ -13,6 +13,13 @@
 
 <h1>Index of Fussball Manager application</h1>
 
+<!--class="container"-->
+<div ng-controller="AppNavigationCtrl" style="display:none;" >
+    <span>Home</span>
+    <span>Games</span>
+    <span>Set up</span>
+</div>
+
 <div ng-controller="PlayerDetailCtrl" class="container">
     <h2>Players</h2>
     <div>
@@ -37,42 +44,10 @@
 
     <ol>
         <li ng-repeat="player in players">
-            <div>{{ player | playerDisplay }}</div>
-            <a title="Edit" href="" ng-click="edit($index)">Edit</a>
-            <a title="Delete" href="" ng-click="delete($index, player)">Delete</a>
-        </li>
-    </ol>
-</div>
-
-<div ng-controller="TeamDetailCtrl" class="container">
-    <h2>Teams</h2>
-    <div>
-        <button type="button" ng-click="create()">Create</button>
-    </div>
-
-    <form name="teamForm" ng-submit="save()" ng-hide="teamEdit == null" ng-cloak>
-        <fieldset>
             <div>
-                <label for="teamName">Name: </label><input id="teamName" type="text" ng-model="teamEdit.name" required />
+                {{ player | playerDisplay }}
+                <span><a title="Edit" href="" ng-click="edit($index)">Edit</a></span>
             </div>
-            <div>
-                <label for="offense">Offense: </label>
-                <select id="offense" ng-model="teamEdit.offense" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
-            </div>
-            <div>
-                <label for="defense">Defense: </label>
-                <select id="defense" ng-model="teamEdit.defense" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
-            </div>
-            <button type="submit">Save</button>
-            <button type="button" ng-click="cancel()">Cancel</button>
-        </fieldset>
-    </form>
-
-    <ol>
-        <li ng-repeat="team in teams">
-            <div>{{ team | teamDisplay }}</div>
-            <a title="Edit" href="" ng-click="edit($index)">Edit</a>
-            <a title="Delete" href="" ng-click="delete($index, team)">Delete</a>
         </li>
     </ol>
 </div>
@@ -85,13 +60,24 @@
 
     <form name="gameForm" ng-submit="save()" ng-hide="gameEdit == null" ng-cloak>
         <fieldset>
+            <span>Blue</span>
             <div>
-                <label for="blueTeam">Blue Team: </label>
-                <select id="blueTeam" ng-model="gameEdit.blueTeam" ng-options="team.id as team.name for team in availableTeams" required></select>
+                <label for="blueAttacker">Attacker: </label>
+                <select id="blueAttacker" ng-model="gameEdit.blueAttacker" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
             </div>
             <div>
-                <label for="redTeam">Red Team: </label>
-                <select id="redTeam" ng-model="gameEdit.redTeam" ng-options="team.id as team.name for team in availableTeams" required></select>
+                <label for="blueDefender">Defender: </label>
+                <select id="blueDefender" ng-model="gameEdit.blueDefender" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
+            </div>
+
+            <span>Red</span>
+            <div>
+                <label for="redDefender">Attacker: </label>
+                <select id="redAttacker" ng-model="gameEdit.redAttacker" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
+            </div>
+            <div>
+                <label for="redDefender">Defender: </label>
+                <select id="redDefender" ng-model="gameEdit.redDefender" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
             </div>
             <button type="submit">Save</button>
             <button type="button" ng-click="cancel()">Cancel</button>
@@ -115,12 +101,13 @@
                         <span>{{ $index + 1 }}.</span>
                         <span class="resourceId">{{ game.id }}</span>
                     </td>
-                    <td>{{ game.blueTeam.name }}</td>
-                    <td>{{ game.redTeam.name }}</td>
+                    <!--<td>A: {{ game.blueAttacker.name }} / D: {{ game.blueDefender.name }}</td>
+                    <td>A: {{ game.redAttacker.name }} /  D: {{ game.redDefender.name }}</td>-->
+                    <td>{{ game | gameBlueTeamDisplay }}</td>
+                    <td>{{ game | gameRedTeamDisplay }}</td>
                     <td>//TODO</td>
                     <td>
                         <span><a title="Edit" href="" ng-click="edit($index)">Edit</a></span>
-                        <span><a title="Delete" href="" ng-click="delete($index, game)">Delete</a></span>
                     </td>
                 </tr>
             </tbody>
