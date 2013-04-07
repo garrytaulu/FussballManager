@@ -64,6 +64,17 @@
             <td>destroy</td>
             <td>Removes a player resource.</td>
           </tr>
+          <tr>
+            <td colspan="4">
+              <h4>Tallies sub resource</h4>
+            </td>
+          </tr>
+          <tr>
+            <td>/player/:player_id/tallies</td>
+            <td>GET</td>
+            <td>index</td>
+            <td>Returns the tally of a players score.</td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -125,7 +136,7 @@
           </tr>
           <tr>
             <td colspan="4">
-              <h4 id="scores">Scores sub resources</h4>
+              <h4>Scores sub resource</h4>
             </td>
           </tr>
           <tr>
@@ -170,6 +181,17 @@
             <td>destroy</td>
             <td>Removes a score resource on a game resource.</td>
           </tr>
+          <tr>
+            <td colspan="4">
+              <h4>Tallies sub resource</h4>
+            </td>
+          </tr>
+          <tr>
+            <td>/games/:game_id/tallies</td>
+            <td>GET</td>
+            <td>index</td>
+            <td>Returns the tally of a games score.</td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -180,7 +202,6 @@
         <ul class="nav nav-list">
           <li><a href="#players">Players</a></li>
           <li><a href="#games">Games</a></li>
-          <li><a href="#scores">Scores</a></li>
         </ul>
       </div>
     </div>

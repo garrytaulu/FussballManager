@@ -27,6 +27,10 @@ table.last-with-buttons tr td:last-child a:not(:last-child) {
   margin-right:8px;
 }
 
+table.last-with-buttons.four tr td:last-child {
+  width: 218px;
+}
+
 table.last-with-buttons.three tr td:last-child {
   width: 160px;
 }
@@ -63,4 +67,8 @@ table.last-with-buttons.two tr td:last-child {
   border-top: 1px solid #dddddd;
   margin:0;
   padding: 8px 16px;
+}
+
+.button-wrapper {
+  margin-bottom: 4px;
 }

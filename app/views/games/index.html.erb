@@ -2,11 +2,15 @@
 <h2><%= yield(:title) %></h2>
 <% if @games.count() == 0 %>
     <p>There are no games. Would you like to <%= link_to 'create', new_game_path %> one?</p>
-    <a title="Back to api documentation" href="/api">Back to documentation</a>
+    <div class="button-wrapper">
+      <a title="Back to api documentation" href="/api">Back to documentation</a>
+    </div>
 <% else %>
-    <%= link_to 'Create a new game', new_game_path, :class => 'btn btn-link pull-right' %>
-    <a title="Back to api documentation" href="/api">Back to documentation</a>
-    <table class="table table-bordered last-with-buttons three">
+    <div class="button-wrapper">
+        <%= link_to 'Create a new game', new_game_path, :class => 'pull-right' %>
+        <a title="Back to api documentation" href="/api">Back to documentation</a>
+    </div>
+    <table class="table table-bordered last-with-buttons four">
       <thead>
       <tr>
         <th>Blue Attacker</th>
@@ -25,6 +29,7 @@
             <td><%= game.redDefender && game.redDefender.name || '' %></td>
             <td>
               <%= link_to 'Sorces', game_scores_path(game), :class => 'btn btn-mini' %>
+              <%= link_to 'Tallies', game, :class => 'btn btn-mini', :href => url_for(game) + '/tallies' %>
               <%= link_to 'Edit', edit_game_path(game), :class => 'btn btn-mini btn-success' %>
               <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
             </td>

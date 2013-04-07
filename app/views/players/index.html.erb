@@ -2,11 +2,15 @@
 <h2><%= yield(:title) %></h2>
 <% if @players.count() == 0 %>
     <p>There are no players. Would you like to <%= link_to 'create', new_player_path %> one?</p>
-    <a title="Back to api documentation" href="/api">Back to documentation</a>
+    <div class="button-wrapper">
+      <a title="Back to api documentation" href="/api">Back to documentation</a>
+    </div>
 <% else %>
-    <%= link_to 'Create a new player', new_player_path, :class => 'btn btn-link pull-right' %>
-    <a title="Back to api documentation" href="/api">Back to documentation</a>
-    <table class="table table-bordered last-with-buttons two">
+    <div class="button-wrapper">
+      <%= link_to 'Create a new player', new_player_path, :class => 'pull-right' %>
+      <a title="Back to api documentation" href="/api">Back to documentation</a>
+    </div>
+    <table class="table table-bordered last-with-buttons three">
       <thead>
       <tr>
         <th>Id</th>
@@ -24,6 +28,7 @@
             <td><%= player.nickname %></td>
             <td><%= player.avatar %></td>
             <td>
+              <%= link_to 'Tallies', player, :class => 'btn btn-mini', :href => url_for(player) + '/tallies' %>
               <%= link_to 'Edit', edit_player_path(player), :class => 'btn btn-mini btn-success' %>
               <%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
             </td>

@@ -1,7 +1,5 @@
 class PlayersController < ApplicationController
 
-  respond_to :html, :json, :xml
-
   # GET /players
   # GET /players.json
   def index

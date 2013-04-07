@@ -1,7 +1,5 @@
 class ScoresController < ApplicationController
 
-  respond_to :html, :json, :xml
-
   # GET games/1/scores
   # GET games/1/scores.json
   def index
@@ -73,8 +71,8 @@ class ScoresController < ApplicationController
     respond_with [@score.game, @score]
   end
 
-  # DELETE /scores/1
-  # DELETE /scores/1.json
+  # DELETE games/1/scores/1
+  # DELETE games/1/scores/1.json
   def destroy
     @score = Score.find(params[:id])
     @score.destroy

@@ -1,13 +1,16 @@
 FussballManager::Application.routes.draw do
 
   scope '/api' do
-    resources :players
+    resources :players do
+      get :tallies, :to => 'tallies#player_index'
+    end
     resources :games do
       resources :scores
+      get :tallies, :to => 'tallies#game_index'
     end
   end
 
-match '/api', :to => 'ApiIndex#index'
+match '/api', :to => 'api_index#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
