@@ -34,18 +34,24 @@ class ScoresController < ApplicationController
   # POST games/1/scores
   # POST games/1/scores.json
   def create
-    @game = Game.find(params[:game_id])
+    @game = Game.find(params[:score][:game])
     @score = Score.new
     @score.game = @game
     @score.player = Player.find(params[:score][:player])
     @score.own_goal = params[:score][:own_goal]
 
     # work out which team scored
-    if @score.player.id == @score.game.blueAttacker.id ||
-       @score.player == @score.game.blueDefender.id
-      @score.team = 'blue'
+    @score.team = 'blue'
+
+    if @score.player.id == @score.game.blueAttacker.id || @score.player.id == @score.game.blueDefender.id
+      if @score.own_goal
+        @score.team = 'red'
+      end
     else
-      @score.team = 'red'
+        @score.team = 'red'
+        if @score.own_goal
+          @score.team = 'blue'
+        end
     end
 
     @score.save
@@ -61,8 +67,7 @@ class ScoresController < ApplicationController
     @score.own_goal = params[:score][:own_goal]
 
     # work out which team scored
-    if @score.player.id == @score.game.blueAttacker.id ||
-        @score.player == @score.game.blueDefender.id
+    if @score.player.id == @score.game.blueAttacker.id || @score.player.id == @score.game.blueDefender.id
       @score.team = 'blue'
     else
       @score.team = 'red'

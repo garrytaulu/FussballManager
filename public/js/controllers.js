@@ -2,7 +2,6 @@
 
 function MainCtrl($scope, $location, Player, Game)
 {
-    $scope.tabs = tabs;
     $scope.location = $location;
 
     $scope.players = [];
@@ -134,10 +133,46 @@ function GamesCtrl($scope, Player, Game, ApiUtility)
 }
 GamesCtrl.$inject = ['$scope', 'Player', 'Game', 'ApiUtility'];
 
-function GameDetailCtrl($scope)
+function GameDetailCtrl($scope, Player, Game, Score, ApiUtility)
 {
+    $scope.master = {};
+    $scope.scoreEdit = null;
+    $scope.gameScores = [];
+
+    // Fill in the recorded game scores
+    Score.query({gameId:4}, function(scores) {
+        $scope.gameScores = scores;
+    });
+
+    $scope.create = function() {
+        Player.query(function(players) {
+            $scope.availablePlayers = players;
+        });
+
+        $scope.scoreEdit = new Score();
+        $scope.scoreEdit.game = 4;
+    };
+
+    $scope.save = function() {
+        ApiUtility.upsert($scope.scoreEdit, function(type, updatedResource) {
+            if (type == 'create') {
+                $scope.gameScores.push(updatedResource);
+            } else {
+                var index = $scope.gameScores.indexOf($scope.master);
+                if (index > -1) {
+                    $scope.gameScores[index] = updatedResource;
+                }
+            }
+
+            $scope.cancel();
+        });
+    };
+
+    $scope.cancel = function() {
+        $scope.scoreEdit = null;
+    };
 }
-GameDetailCtrl.$inject = ['$scope'];
+GameDetailCtrl.$inject = ['$scope', 'Player', 'Game', 'Score', 'ApiUtility'];
 
 function HomeCtrl($scope)
 {

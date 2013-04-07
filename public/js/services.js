@@ -45,6 +45,27 @@ angular.module('fm.services', ['ngResource'])
         }])
 
     /**
+     * Main service that communicates with the Game/Scores API resource.
+     *
+     * Dependencies:
+     *
+     * $resource
+     */
+    .factory('Score', ['$resource', function($resource){
+        return $resource(
+            Globals.apiBaseUri + 'api/games/:gameId/scores/:scoreId'
+            , {gameId:4, scoreId: '@id'}
+            , {
+                'get'   : { method:'GET' },
+                'create': { method:'POST' },
+                'update': { method:'PUT' },
+                'query' : { method:'GET', isArray:true },
+                'delete': { method:'DELETE' }
+            }
+        );
+    }])
+
+    /**
      * An api utility service with some handy methods for calling the api resources.
      */
     .factory('ApiUtility', [function() {
