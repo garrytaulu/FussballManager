@@ -1,35 +1,35 @@
-<h1>Games Resource</h1>
-
+<% title 'Games' %>
+<h2><%= yield(:title) %></h2>
 <% if @games.count() == 0 %>
     <p>There are no games. Would you like to <%= link_to 'create', new_game_path %> one?</p>
+    <a title="Back to api documentation" href="/api">Back to documentation</a>
 <% else %>
-    <%= link_to 'New Game', new_game_path %>
-    <br/>
-    <% @games.each do |game| %>
-
-        <h4>Game <%= game.id %></h4>
-
-        <table>
-          <tr>
-            <th>Blue Attacker</th>
-            <th>Blue Defender</th>
-            <th>Red Attacker</th>
-            <th>Red Defender</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
+    <%= link_to 'Create a new game', new_game_path, :class => 'btn btn-link pull-right' %>
+    <a title="Back to api documentation" href="/api">Back to documentation</a>
+    <table class="table table-bordered last-with-buttons three">
+      <thead>
+      <tr>
+        <th>Blue Attacker</th>
+        <th>Blue Defender</th>
+        <th>Red Attacker</th>
+        <th>Red Defender</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @games.each do |game| %>
           <tr>
             <td><%= game.blueAttacker && game.blueAttacker.name || '' %></td>
             <td><%= game.blueDefender && game.blueDefender.name || '' %></td>
             <td><%= game.redAttacker && game.redAttacker.name || '' %></td>
             <td><%= game.redDefender && game.redDefender.name || '' %></td>
-            <td><%= link_to 'Score', game_scores_path(game) %></td>
-            <td><%= link_to 'Show', game %></td>
-            <td><%= link_to 'Edit', edit_game_path(game) %></td>
-            <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td>
+              <%= link_to 'Sorces', game_scores_path(game), :class => 'btn btn-mini' %>
+              <%= link_to 'Edit', edit_game_path(game), :class => 'btn btn-mini btn-success' %>
+              <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
+            </td>
           </tr>
-        </table>
-    <% end %>
+      <% end %>
+      </tbody>
+    </table>
 <% end %>

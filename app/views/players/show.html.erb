@@ -1,26 +1,20 @@
-<p id="notice"><%= notice %></p>
-
+<% title 'Viewing Player' %>
+<h2><%= yield(:title) %></h2>
 <p>
   <b>Id:</b>
   <%= @player.id %>
 </p>
-
 <p>
   <b>Name:</b>
   <%= @player.name %>
 </p>
-
 <p>
   <b>Nickname:</b>
   <%= @player.nickname %>
 </p>
-
 <p>
   <b>Avatar:</b>
   <%= @player.avatar %>
 </p>
 
-<%= link_to 'New', new_player_path %> |
-<%= link_to 'Edit', edit_player_path(@player) %> |
-<%= link_to 'Destroy', @player, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back', players_path %>
+<%= link_to 'Back to players', players_path %>

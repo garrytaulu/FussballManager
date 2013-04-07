@@ -1,27 +1,25 @@
-<p id="notice"><%= notice %></p>
-
+<% title 'Viewing Game' %>
+<h2><%= yield(:title) %></h2>
 <p>
   <b>Id:</b>
   <%= @game.id %>
 </p>
-
 <p>
   <b>Blue Attacker: </b>
   <%= @game.blueAttacker.name %>
-  <br/>
+</p>
+<p>
   <b>Blue Defender: </b>
   <%= @game.blueDefender.name %>
 </p>
-
 <p>
   <b>Red Attacker: </b>
   <%= @game.redAttacker.name %>
-  <br/>
+</p>
+<p>
   <b>Red Defender: </b>
   <%= @game.redDefender.name %>
 </p>
 
-<%= link_to 'New', new_game_path %> |
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Destroy', @game, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back', games_path %>
+<%= link_to 'Back to games', games_path %>
+

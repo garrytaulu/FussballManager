@@ -1,0 +1,66 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+body {
+  padding: 20px;
+}
+
+table.last-with-buttons tr td:last-child {
+  text-align: center;
+}
+
+table.last-with-buttons tr td:last-child a:not(:last-child) {
+  margin-right:8px;
+}
+
+table.last-with-buttons.three tr td:last-child {
+  width: 160px;
+}
+
+table.last-with-buttons.two tr td:last-child {
+  width: 110px;
+}
+
+.form-wrapper .control-label {
+  width: 220px;
+}
+
+.sidebar-nav {
+  width: 22.5%;
+}
+
+.sidebar-nav ul {
+  padding: 0;
+  border: 1px solid #dddddd;
+  background-color: #fff;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+  -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+  box-shadow: 0 1px 4px rgba(0,0,0,.065)
+}
+
+.sidebar-nav li:first-child > a {
+  border-top: none;
+}
+
+.sidebar-nav li > a {
+  border-top: 1px solid #dddddd;
+  margin:0;
+  padding: 8px 16px;
+}

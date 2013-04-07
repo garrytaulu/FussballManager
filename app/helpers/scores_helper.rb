@@ -1,6 +1,6 @@
 module ScoresHelper
   # Generates a select element of players
-  def scores_player_select(game, score, object, method)
+  def scores_player_select(game, score, object, method, required)
     players = [game.blueAttacker, game.blueDefender, game.redAttacker, game.redDefender]
 
     collection_select(
@@ -9,8 +9,9 @@ module ScoresHelper
         players,
         :id,
         :name,
-        :selected => score[method] && score[method] || '',
-        :include_blank => true
+        {:selected => score[method] && score[method] || '',
+        :include_blank => true},
+        :required => required
     )
   end
 end

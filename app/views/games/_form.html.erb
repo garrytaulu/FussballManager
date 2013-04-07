@@ -1,23 +1,32 @@
+<h2><%= yield(:title) %></h2>
 <% if @players_count >= 4 %>
     <%= form_for(@game) do |f| %>
-        <div class="field">
-          <%= f.label :blueAttacker, 'Blue Attacker:' %><br/>
-          <%= player_select(@game, :game, :blueAttacker)%>
+        <div class="control-group">
+          <%= f.label(:blueAttacker, 'Blue Attacker:', :class => 'control-label') %>
+          <div class="controls">
+            <%= player_select(@game, :game, :blueAttacker, true)%>
+          </div>
         </div>
-        <div class="field">
-          <%= f.label :blueDefender, 'Blue Defender:' %><br/>
-          <%= player_select(@game, :game, :blueDefender)%>
+        <div class="control-group">
+          <%= f.label(:blueDefender, 'Blue Defender:', :class => 'control-label') %>
+          <div class="controls">
+            <%= player_select(@game, :game, :blueDefender, true)%>
+          </div>
         </div>
-        <div class="field">
-          <%= f.label :redAttacker, 'Red Attacker:' %><br/>
-          <%= player_select(@game, :game, :redAttacker)%>
+        <div class="control-group">
+          <%= f.label(:redAttacker, 'Red Attacker:', :class => 'control-label') %>
+          <div class="controls">
+            <%= player_select(@game, :game, :redAttacker, true)%>
+          </div>
         </div>
-        <div class="field">
-          <%= f.label :redDefender, 'Red Defender:' %><br/>
-          <%= player_select(@game, :game, :redDefender)%>
+        <div class="control-group">
+          <%= f.label(:redDefender, 'Red Defender:', :class => 'control-label') %>
+          <div class="controls">
+            <%= player_select(@game, :game, :redDefender, true)%>
+          </div>
         </div>
         <div class="actions">
-          <%= f.submit %>
+          <%= f.submit(:class => 'btn btn-success') %>
         </div>
     <% end %>
 <% else %>
@@ -26,5 +35,5 @@
       There must be a minimum of 4 players before a game can be created.
     </p>
 <% end %>
-<%= link_to 'Back', games_path %>
+<%= link_to 'Back to games', games_path %>
 

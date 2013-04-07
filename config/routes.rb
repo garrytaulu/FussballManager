@@ -7,6 +7,8 @@ FussballManager::Application.routes.draw do
     end
   end
 
+match '/api', :to => 'ApiIndex#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

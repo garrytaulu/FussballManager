@@ -1,15 +1,21 @@
+<h2><%= yield(:title) %></h2>
 <%= form_for([@game, @score]) do |f| %>
-    <div class="field">
-      <%= f.label :player %><br />
-      <%= scores_player_select(@game, @score, :score, :player) %>
+    <div class="control-group">
+      <%= f.label(:player, :class => 'control-label') %>
+      <div class="controls">
+        <%= scores_player_select(@game, @score, :score, :player, true) %>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :own_goal %>
-      <%= f.check_box :own_goal %>
+    <div class="control-group">
+      <div class="controls">
+        <label class="checkbox">
+          <%= f.check_box :own_goal %> Own goal?
+        </label>
+      </div>
     </div>
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit(:class => 'btn btn-success') %>
     </div>
 <% end %>
 
-<%= link_to 'Back', game_scores_path(@game) %>
+<%= link_to 'Back to game scores', game_scores_path(@game) %>

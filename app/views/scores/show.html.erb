@@ -1,30 +1,24 @@
-<p id="notice"><%= notice %></p>
-
+<% title 'Viewing Score' %>
+<h2><%= yield(:title) %></h2>
 <p>
   <b>Id:</b>
   <%= @score.id %>
 </p>
-
 <p>
   <b>Game:</b>
   <%= @score.game && @score.game.id || '' %>
 </p>
-
 <p>
   <b>Player:</b>
   <%= @score.player && @score.player.name || '' %>
 </p>
-
 <p>
   <b>Own goal:</b>
   <%= @score.own_goal && 'Yes' || 'No' %>
 </p>
-
 <p>
   <b>Team:</b>
   <%= @score.team || '' %>
 </p>
 
-<%= link_to 'New', new_game_score_path(@score.game, @score) %> |
-<%= link_to 'Edit', edit_game_score_path(@score.game, @score) %> |
-<%= link_to 'Back', game_scores_path %>
+<%= link_to 'Back to game scores', game_scores_path %>

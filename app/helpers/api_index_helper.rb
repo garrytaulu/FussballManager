@@ -1,0 +1,2 @@
+module ApiIndexHelper
+end

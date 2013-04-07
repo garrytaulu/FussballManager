@@ -1,0 +1,188 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span9">
+      <h2>Fussball Manager Api Documentation</h2>
+      <div class="alert alert-info">
+        To see resources formatted in json or xml append '.json' or '.xml' to the end of the uri.
+        <br/>
+        <br/>
+        Example: api/players.json or api/players/1.json
+      </div>
+      <div id="players">
+      <h3>Players Resource</h3>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>Path</th>
+            <th>HTTP Verb</th>
+            <th>Action</th>
+            <th>Description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <a title="Go to players resource" href="/api/players">/players</a>
+            </td>
+            <td class="small-column">GET</td>
+            <td class="small-column">index</td>
+            <td>Returns a list of all the players.</td>
+          </tr>
+          <tr>
+            <td>/players/new</td>
+            <td>GET</td>
+            <td>new</td>
+            <td>Returns a HTML form to create a player resource.</td>
+          </tr>
+          <tr>
+            <td>/players</td>
+            <td>POST</td>
+            <td>create</td>
+            <td>Creates a new player resource.</td>
+          </tr>
+          <tr>
+            <td>/players/:id</td>
+            <td>GET</td>
+            <td>show</td>
+            <td>Returns a player resource.</td>
+          </tr>
+          <tr>
+            <td>/photos/:id/edit</td>
+            <td>GET</td>
+            <td>edit</td>
+            <td>Returns a HTML form for editing a player resource.</td>
+          </tr>
+          <tr>
+            <td>/players/:id</td>
+            <td>PUT</td>
+            <td>update</td>
+            <td>Updates a player resource.</td>
+          </tr>
+          <tr>
+            <td>/players/:id</td>
+            <td>DELETE</td>
+            <td>destroy</td>
+            <td>Removes a player resource.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="games">
+        <h3>Games Resource</h3>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>Path</th>
+            <th>HTTP Verb</th>
+            <th>Action</th>
+            <th>Description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <a title="Go to games resource" href="/api/games">/games</a>
+            </td>
+            <td>GET</td>
+            <td>index</td>
+            <td>Returns a list of all the games.</td>
+          </tr>
+          <tr>
+            <td>/games/new</td>
+            <td>GET</td>
+            <td>new</td>
+            <td>Returns a HTML form to create a game resource.</td>
+          </tr>
+          <tr>
+            <td>/games</td>
+            <td>POST</td>
+            <td>create</td>
+            <td>Creates a new game resource.</td>
+          </tr>
+          <tr>
+            <td>/games/:id</td>
+            <td>GET</td>
+            <td>show</td>
+            <td>Returns a game resource.</td>
+          </tr>
+          <tr>
+            <td>/games/:id/edit</td>
+            <td>GET</td>
+            <td>edit</td>
+            <td>Returns a HTML form for editing a game resource.</td>
+          </tr>
+          <tr>
+            <td>/games/:id</td>
+            <td>PUT</td>
+            <td>update</td>
+            <td>Updates a game resource.</td>
+          </tr>
+          <tr>
+            <td>/games/:id</td>
+            <td>DELETE</td>
+            <td>destroy</td>
+            <td>Removes a game resource.</td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <h4 id="scores">Scores sub resources</h4>
+            </td>
+          </tr>
+          <tr>
+            <td>/games/:game_id/scores</td>
+            <td>GET</td>
+            <td>index</td>
+            <td>Returns a list of all the score resources for a game resource.</td>
+          </tr>
+          <tr>
+            <td>/games/:game_id/scores/new</td>
+            <td>GET</td>
+            <td>new</td>
+            <td>Returns a HTML form to create a new score resource for a game resource.</td>
+          </tr>
+          <tr>
+            <td>/games/:game_id/scores</td>
+            <td>POST</td>
+            <td>create</td>
+            <td>Creates a new score resource for a game resource.</td>
+          </tr>
+          <tr>
+            <td>/games/:game_id/scores/:id</td>
+            <td>GET</td>
+            <td>show</td>
+            <td>Returns a score resource from a game resource.</td>
+          </tr>
+          <tr>
+            <td>/games/:game_id/scores/:id/edit</td>
+            <td>GET</td>
+            <td>edit</td>
+            <td>Returns a HTML form for editing a score resource on a game resource.</td>
+          </tr>
+          <tr>
+            <td>/games/:game_id/scores/:id</td>
+            <td>PUT</td>
+            <td>update</td>
+            <td>Updates a score resource on a game resource.</td>
+          </tr>
+          <tr>
+            <td>/games/:game_id/scores/:id</td>
+            <td>DELETE</td>
+            <td>destroy</td>
+            <td>Removes a score resource on a game resource.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="span3">
+      <div class="sidebar-nav affix">
+        <h3>Resources</h3>
+        <ul class="nav nav-list">
+          <li><a href="#players">Players</a></li>
+          <li><a href="#games">Games</a></li>
+          <li><a href="#scores">Scores</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,17 +1,25 @@
+<h2><%= yield(:title) %></h2>
 <%= form_for(@player) do |f| %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :nickname %><br />
-    <%= f.text_field :nickname %>
-  </div>
-  <div class="field">
-    <%= f.label :avatar %><br />
-    <%= f.text_field :avatar %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="control-group">
+      <%= f.label(:name, :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field :name, :required => '' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:nickname, :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field :nickname, :required => '' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label(:avatar, :class => 'control-label') %>
+      <div class="controls">
+        <%= f.text_field :avatar, :required => '' %>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit(:class => 'btn btn-success') %>
+    </div>
 <% end %>
+<%= link_to 'Back to players', players_path %>

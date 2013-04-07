@@ -1,17 +1,20 @@
-<h1>Game Scores</h1>
-
+<% title 'Game Scores' %>
+<h2><%= yield(:title) %></h2>
 <% if @scores.count() == 0 %>
     <p>There are no scores. Would you like to <%= link_to 'create', new_game_score_path %> one?</p>
+    <a title="Back to api documentation" href="/api">Back to documentation</a> |
+    <%= link_to 'Back to games', games_path %>
 <% else %>
-    <table>
+    <%= link_to 'Create a new score', new_game_score_path, :class => 'btn btn-link pull-right' %>
+    <a title="Back to api documentation" href="/api">Back to documentation</a> |
+    <%= link_to 'Back to games', games_path %>
+    <table class="table table-bordered last-with-buttons two">
         <tr>
           <th>Id</th>
           <th>Game</th>
           <th>Player</th>
           <th>Own goal</th>
           <th>Team</th>
-          <th></th>
-          <th></th>
           <th></th>
         </tr>
 
@@ -22,13 +25,11 @@
               <td><%= score.player.name %></td>
               <td><%= score.own_goal && 'Yes' || 'No' %></td>
               <td><%= score.team %></td>
-              <td><%= link_to 'Show', game_score_path(score.game, score) %></td>
-              <td><%= link_to 'Edit', edit_game_score_path(score.game, score) %></td>
-              <td><%= link_to 'Destroy', [score.game, score], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td>
+                <%= link_to 'Edit', edit_game_score_path(score.game, score), :class => 'btn btn-mini btn-success' %>
+                <%= link_to 'Destroy', [score.game, score], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
+              </td>
             </tr>
         <% end %>
     </table>
-    <br />
-
-    <%= link_to 'New Score', new_game_score_path %>
 <% end %>
