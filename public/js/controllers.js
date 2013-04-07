@@ -1,17 +1,14 @@
 'use strict';
 
-function MainCtrl($scope, Player, Team, Game)
+function MainCtrl($scope, $location, Player, Game)
 {
+    $scope.tabs = tabs;
+    $scope.location = $location;
+
     $scope.players = [];
 
     Player.query(function(result) {
         $scope.players = result;
-    });
-
-    $scope.teams = [];
-
-    Team.query(function(result) {
-        $scope.teams = result;
     });
 
     $scope.games = [];
@@ -21,12 +18,12 @@ function MainCtrl($scope, Player, Team, Game)
     });
 }
 
-MainCtrl.$inject = ['$scope', 'Player', 'Team', 'Game'];
+MainCtrl.$inject = ['$scope', '$location', 'Player', 'Game'];
 
 /* *********************** */
-/* ** PLAYER *************** */
+/* ** PLAYER ************* */
 /* *********************** */
-function PlayerDetailCtrl($scope, Player, ApiUtility)
+function PlayersCtrl($scope, Player, ApiUtility)
 {
     $scope.master = {};
     $scope.playerEdit = null;
@@ -66,82 +63,27 @@ function PlayerDetailCtrl($scope, Player, ApiUtility)
     };
 }
 
-PlayerDetailCtrl.$inject = ['$scope', 'Player', 'ApiUtility'];
+PlayersCtrl.$inject = ['$scope', 'Player', 'ApiUtility'];
 
 /* *********************** */
-/* ** TEAM *************** */
+/* ** NAVIGATION ********* */
 /* *********************** */
-function TeamDetailCtrl($scope, Team, Player, ApiUtility)
+function AppNavigationCtrl($scope)
 {
-    $scope.master = {};
-    $scope.teamEdit = null;
-
-    $scope.create = function() {
-        Player.query(function(players) {
-            $scope.availablePlayers = players;
-        });
-
-        $scope.teamEdit = new Team();
-    };
-
-    $scope.edit = function(index) {
-        $scope.master = $scope.teams[index];
-        $scope.teamEdit = angular.copy($scope.master);
-
-        // offense and defense are complex objs at this point,
-        // however the select control (and the server) require
-        // them to be IDs, so we flatten them out here
-        $scope.teamEdit.offense = $scope.teamEdit.offense.id;
-        $scope.teamEdit.defense = $scope.teamEdit.defense.id;
-
-        // Fill in the available players
-        Player.query(function(players) {
-            $scope.availablePlayers = players;
-        });
-    };
-
-    $scope.save = function() {
-        ApiUtility.upsert($scope.teamEdit, function(type, updatedResource) {
-            if (type == 'create') {
-                $scope.teams.push(updatedResource);
-            } else {
-                var index = $scope.teams.indexOf($scope.master);
-                if (index > -1) {
-                    $scope.teams[index] = updatedResource;
-                }
-            }
-
-            $scope.cancel();
-        });
-    };
-
-    $scope.delete = function(index, team) {
-        team['$delete'](function() {
-            $scope.teams.splice(index, 1);
-        });
-    };
-
-    $scope.cancel = function() {
-        $scope.teamEdit = null;
-    };
 }
-
-TeamDetailCtrl.$inject = ['$scope', 'Team', 'Player', 'ApiUtility'];
+AppNavigationCtrl.$inject = ['$scope'];
 
 /* *********************** */
 /* ** GAME *************** */
 /* *********************** */
-function GameDetailCtrl($scope, Player, Team, Game, ApiUtility)
+function GamesCtrl($scope, Player, Game, ApiUtility)
 {
     $scope.master = {};
     $scope.gameEdit = null;
 
     $scope.create = function() {
-//        Player.query(function(players) {
-//            $scope.availablePlayers = players;
-//        });
-        Team.query(function(teams) {
-            $scope.availableTeams = teams;
+        Player.query(function(players) {
+            $scope.availablePlayers = players;
         });
 
         $scope.gameEdit = new Game();
@@ -151,19 +93,17 @@ function GameDetailCtrl($scope, Player, Team, Game, ApiUtility)
         $scope.master = $scope.games[index];
         $scope.gameEdit = angular.copy($scope.master);
 
-        // blueTeam and redTeam are complex objs at this point,
-        // however the select control (and the server) require
-        // them to be IDs, so we flatten them out here
-        $scope.gameEdit.blueTeam = $scope.gameEdit.blueTeam.id;
-        $scope.gameEdit.redTeam  = $scope.gameEdit.redTeam.id;
+        // blueAttacker, blueDefender, redAttacker and redDefender are
+        // complex objs at this point, however the select control
+        // (and the server) require them to be IDs, so we flatten them out here
+        $scope.gameEdit.blueAttacker = $scope.gameEdit.blueAttacker.id;
+        $scope.gameEdit.blueDefender = $scope.gameEdit.blueDefender.id;
+        $scope.gameEdit.redAttacker  = $scope.gameEdit.redAttacker.id;
+        $scope.gameEdit.redDefender  = $scope.gameEdit.redDefender.id;
 
         // Fill in the available players
-//        Player.query(function(players) {
-//            $scope.availablePlayers = players;
-//        });
-
-        Team.query(function(teams) {
-            $scope.availableTeams = teams;
+        Player.query(function(players) {
+            $scope.availablePlayers = players;
         });
     };
 
@@ -192,5 +132,14 @@ function GameDetailCtrl($scope, Player, Team, Game, ApiUtility)
         $scope.gameEdit = null;
     };
 }
+GamesCtrl.$inject = ['$scope', 'Player', 'Game', 'ApiUtility'];
 
-GameDetailCtrl.$inject = ['$scope', 'Player', 'Team', 'Game', 'ApiUtility'];
+function GameDetailCtrl($scope)
+{
+}
+GameDetailCtrl.$inject = ['$scope'];
+
+function HomeCtrl($scope)
+{
+}
+HomeCtrl.$inject = ['$scope'];

@@ -15,11 +15,11 @@ angular.module('fm.filters', [])
             var result = "";
 
             if (angular.isDefined(player)) {
-                result = player.name;
-                result += " " + player.nickname;
+//                result = player.name;
+                result = player.nickname;
 
-                var dateFormatted = $filter('date').call(this, player.created_at, 'dd/MM/yyyy h:mm a');
-                result += " " + dateFormatted.toLowerCase();
+//                var dateFormatted = $filter('date').call(this, player.created_at, 'dd/MM/yyyy h:mm a');
+//                result += " " + dateFormatted.toLowerCase();
             }
 
             return result;
@@ -27,20 +27,20 @@ angular.module('fm.filters', [])
     }])
 
     /**
-      * Returns the Team with the following format.
+      * Returns the Game with the following format.
       *
-      * {team.name} - Offense: {team.offense.nickname}, Defense: {team.defense.nickname}
+      * A: {game.blueAttacker.name} / D: {game.blueDefender.name}
       *
       * Dependencies:
       *
       * $filter
       */
-    .filter('teamDisplay', function() {
-        return function(team) {
+    .filter('gameBlueTeamDisplay', function() {
+        return function(game) {
             var result = "";
 
-            if (angular.isDefined(team)) {
-                result = team.name + " - Offense: " + team.offense.nickname + ", Defense: " + team.defense.nickname;
+            if (angular.isDefined(game)) {
+                result = "A: " + game.blueAttacker.name + " / D: " + game.blueDefender.name;
             }
 
             return result;
@@ -48,20 +48,20 @@ angular.module('fm.filters', [])
     })
 
     /**
-      * Returns the Game with the following format.
-      *
-      * Blue Team: {game.blueTeam.name} VS Red Team: {game.redTeam.name}
-      *
-      * Dependencies:
-      *
-      * $filter
-      */
-    .filter('gameDisplay', function() {
+     * Returns the Game with the following format.
+     *
+     * A: {game.redAttacker.name} / D: {game.redDefender.name}
+     *
+     * Dependencies:
+     *
+     * $filter
+     */
+    .filter('gameRedTeamDisplay', function() {
         return function(game) {
             var result = "";
 
             if (angular.isDefined(game)) {
-                result = "Blue Team: " + game.blueTeam.name + " VS Red Team: " + game.redTeam.name;
+                result = "A: " + game.redAttacker.name + " / D: " + game.redDefender.name;
             }
 
             return result;

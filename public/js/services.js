@@ -24,27 +24,6 @@ angular.module('fm.services', ['ngResource'])
     }])
 
     /**
-     * Main service that communicates with the Team API resource.
-     *
-     * Dependencies:
-     *
-     * $resource
-     */
-        .factory('Team', ['$resource', function($resource){
-            return $resource(
-                Globals.apiBaseUri + 'api/teams/:id'
-                , {id: '@id'}
-                , {
-                    'get'   : { method:'GET' },
-                    'create': { method:'POST' },
-                    'update': { method:'PUT' },
-                    'query' : { method:'GET', isArray:true },
-                    'delete': { method:'DELETE' }
-                }
-            );
-        }])
-
-    /**
      * Main service that communicates with the Game API resource.
      *
      * Dependencies:
