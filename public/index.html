@@ -14,13 +14,15 @@
 <h1>Index of Fussball Manager application</h1>
 
 <!--class="container"-->
-<div ng-controller="AppNavigationCtrl" style="display:none;" >
-    <span>Home</span>
-    <span>Games</span>
-    <span>Set up</span>
+<div ng-controller="AppNavigationCtrl" style="display:block;" >
+    <span><a href="home">Home</a></span>
+    <span><a href="games">Games</a></span>
+    <span><a href="players">Players</a></span>
 </div>
 
-<div ng-controller="PlayerDetailCtrl" class="container">
+<div ng-view></div>
+
+<!--<div ng-controller="PlayerDetailCtrl" class="container">
     <h2>Players</h2>
     <div>
         <button type="button" ng-click="create()">Create</button>
@@ -50,9 +52,9 @@
             </div>
         </li>
     </ol>
-</div>
+</div>-->
 
-<div ng-controller="GameDetailCtrl" class="container">
+<!--<div ng-controller="GamesCtrl" class="container">
     <h2>Games</h2>
     <div>
         <button type="button" ng-click="create()">Create</button>
@@ -84,43 +86,33 @@
         </fieldset>
     </form>
 
-    <ol>
-        <table cellspacing="0" cellpadding="3" border="0">
-            <thead>
-                <tr>
-                    <td>#</td>
-                    <td>Blue Team</td>
-                    <td>Red Team</td>
-                    <td>Score</td>
-                    <td>Actions</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="game in games">
-                    <td>
-                        <span>{{ $index + 1 }}.</span>
-                        <span class="resourceId">{{ game.id }}</span>
-                    </td>
-                    <!--<td>A: {{ game.blueAttacker.name }} / D: {{ game.blueDefender.name }}</td>
-                    <td>A: {{ game.redAttacker.name }} /  D: {{ game.redDefender.name }}</td>-->
-                    <td>{{ game | gameBlueTeamDisplay }}</td>
-                    <td>{{ game | gameRedTeamDisplay }}</td>
-                    <td>//TODO</td>
-                    <td>
-                        <span><a title="Edit" href="" ng-click="edit($index)">Edit</a></span>
-                    </td>
-                </tr>
-            </tbody>
-
-            <!--<li ng-repeat="game in games">
-                <div>
+    <table cellspacing="0" cellpadding="3" border="0">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Blue Team</td>
+                <td>Red Team</td>
+                <td>Score</td>
+                <td>Actions</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="game in games">
+                <td>
+                    <span>{{ $index + 1 }}.</span>
                     <span class="resourceId">{{ game.id }}</span>
-                    {{ game | gameDisplay }}
-                </div>
-            </li>-->
-        </table>
-    </ol>
-</div>
+                </td>
+                <td>{{ game | gameBlueTeamDisplay }}</td>
+                <td>{{ game | gameRedTeamDisplay }}</td>
+                <td>//TODO</td>
+                <td>
+                    <span><a title="Edit" href="" ng-click="edit($index)">Edit</a></span>
+                    <span><a title="View" href="" ng-click="view($index)">View</a></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>-->
 
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="lib/angular.js"></script>

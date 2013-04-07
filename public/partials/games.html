@@ -1,0 +1,59 @@
+<div class="container">
+    <h2>Games</h2>
+    <div>
+        <button type="button" ng-click="create()">Create</button>
+    </div>
+
+    <form name="gameForm" ng-submit="save()" ng-hide="gameEdit == null" ng-cloak>
+        <fieldset>
+            <span>Blue</span>
+            <div>
+                <label for="blueAttacker">Attacker: </label>
+                <select id="blueAttacker" ng-model="gameEdit.blueAttacker" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
+            </div>
+            <div>
+                <label for="blueDefender">Defender: </label>
+                <select id="blueDefender" ng-model="gameEdit.blueDefender" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
+            </div>
+
+            <span>Red</span>
+            <div>
+                <label for="redDefender">Attacker: </label>
+                <select id="redAttacker" ng-model="gameEdit.redAttacker" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
+            </div>
+            <div>
+                <label for="redDefender">Defender: </label>
+                <select id="redDefender" ng-model="gameEdit.redDefender" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
+            </div>
+            <button type="submit">Save</button>
+            <button type="button" ng-click="cancel()">Cancel</button>
+        </fieldset>
+    </form>
+
+    <table cellspacing="0" cellpadding="3" border="0">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Blue Team</td>
+                <td>Red Team</td>
+                <td>Score</td>
+                <td>Actions</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="game in games">
+                <td>
+                    <span>{{ $index + 1 }}.</span>
+                    <span class="resourceId">{{ game.id }}</span>
+                </td>
+                <td>{{ game | gameBlueTeamDisplay }}</td>
+                <td>{{ game | gameRedTeamDisplay }}</td>
+                <td>//TODO</td>
+                <td>
+                    <span><a title="Edit" href="" ng-click="edit($index)">Edit</a></span>
+                    <span><a title="View" href="games/{{ game.id }}" >View</a></span> <!--ng-click="view($index)"-->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

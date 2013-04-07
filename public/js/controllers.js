@@ -1,7 +1,10 @@
 'use strict';
 
-function MainCtrl($scope, Player, Game)
+function MainCtrl($scope, $location, Player, Game)
 {
+    $scope.tabs = tabs;
+    $scope.location = $location;
+
     $scope.players = [];
 
     Player.query(function(result) {
@@ -15,12 +18,12 @@ function MainCtrl($scope, Player, Game)
     });
 }
 
-MainCtrl.$inject = ['$scope', 'Player', 'Game'];
+MainCtrl.$inject = ['$scope', '$location', 'Player', 'Game'];
 
 /* *********************** */
 /* ** PLAYER ************* */
 /* *********************** */
-function PlayerDetailCtrl($scope, Player, ApiUtility)
+function PlayersCtrl($scope, Player, ApiUtility)
 {
     $scope.master = {};
     $scope.playerEdit = null;
@@ -60,22 +63,20 @@ function PlayerDetailCtrl($scope, Player, ApiUtility)
     };
 }
 
-PlayerDetailCtrl.$inject = ['$scope', 'Player', 'ApiUtility'];
+PlayersCtrl.$inject = ['$scope', 'Player', 'ApiUtility'];
 
 /* *********************** */
 /* ** NAVIGATION ********* */
 /* *********************** */
 function AppNavigationCtrl($scope)
 {
-
 }
-
 AppNavigationCtrl.$inject = ['$scope'];
 
 /* *********************** */
 /* ** GAME *************** */
 /* *********************** */
-function GameDetailCtrl($scope, Player, Game, ApiUtility)
+function GamesCtrl($scope, Player, Game, ApiUtility)
 {
     $scope.master = {};
     $scope.gameEdit = null;
@@ -131,5 +132,14 @@ function GameDetailCtrl($scope, Player, Game, ApiUtility)
         $scope.gameEdit = null;
     };
 }
+GamesCtrl.$inject = ['$scope', 'Player', 'Game', 'ApiUtility'];
 
-GameDetailCtrl.$inject = ['$scope', 'Player', 'Game', 'ApiUtility'];
+function GameDetailCtrl($scope)
+{
+}
+GameDetailCtrl.$inject = ['$scope'];
+
+function HomeCtrl($scope)
+{
+}
+HomeCtrl.$inject = ['$scope'];
