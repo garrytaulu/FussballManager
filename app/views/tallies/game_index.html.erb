@@ -1,0 +1,74 @@
+<% title 'Game Tallies' %>
+<h2><%= yield(:title) %></h2>
+<div class="button-wrapper">
+  <a title="Back to api documentation" href="/api">Back to documentation</a> |
+  <%= link_to 'Back to games', games_path %>
+</div>
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>Score</th>
+    <th>Total</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>Blue Team</td>
+    <td><%= @tallies.blueTeamTotal %></td>
+  </tr>
+  <tr>
+    <td>Red Team</td>
+    <td><%= @tallies.redTeamTotal %></td>
+  </tr>
+  <tr>
+    <td>Blue Attacker</td>
+    <td><%= @tallies.blueAttackerTotal %></td>
+  </tr>
+  <tr>
+    <td>Blue Defender</td>
+    <td><%= @tallies.blueDefenderTotal %></td>
+  </tr>
+  <tr>
+    <td>Red Attacker</td>
+    <td><%= @tallies.redAttackerTotal %></td>
+  </tr>
+  <tr>
+    <td>Red Defender</td>
+    <td><%= @tallies.redDefenderTotal %></td>
+  </tr>
+
+
+  <tr>
+    <td>Red Team Own Goals</td>
+    <td><%= @tallies.redTeamOwnGoalsTotal %></td>
+  </tr>
+  <tr>
+    <td>Blue Team Own Goals</td>
+    <td><%= @tallies.blueTeamOwnGoalsTotal %></td>
+  </tr>
+  <tr>
+    <td>Red Attacker Own Goals</td>
+    <td><%= @tallies.redAttackerOwnGoalsTotal %></td>
+  </tr>
+  <tr>
+    <td>Red Defender Own Goals</td>
+    <td><%= @tallies.redDefenderOwnGoalsTotal %></td>
+  </tr>
+  <tr>
+    <td>Blue Attacker Own Goals</td>
+    <td><%= @tallies.blueAttackerOwnGoalsTotal %></td>
+  </tr>
+  <tr>
+    <td>Blue Defender Own Goals</td>
+    <td><%= @tallies.blueDefenderOwnGoalsTotal %></td>
+  </tr>
+
+
+
+
+  <tr>
+    <td>Time Taken</td>
+    <td><%= @tallies.timeTaken %></td>
+  </tr>
+  </tbody>
+</table>
