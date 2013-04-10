@@ -3,7 +3,7 @@ class ScoresController < ApplicationController
   # GET games/1/scores
   # GET games/1/scores.json
   def index
-    @scores = Score.find_all_by_game(params[:game_id])
+    @scores = Score.order('created_at').find_all_by_game(params[:game_id])
 
     respond_with @scores
   end
@@ -65,10 +65,17 @@ class ScoresController < ApplicationController
     @score.own_goal = params[:score][:own_goal]
 
     # work out which team scored
+    @score.team = 'blue'
+
     if @score.player.id == @score.game.blueAttacker.id || @score.player.id == @score.game.blueDefender.id
-      @score.team = 'blue'
+      if @score.own_goal
+        @score.team = 'red'
+      end
     else
       @score.team = 'red'
+      if @score.own_goal
+        @score.team = 'blue'
+      end
     end
 
     @score.save

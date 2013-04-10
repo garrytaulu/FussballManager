@@ -1,19 +1,22 @@
 <div class="container">
     <h2>Game Scores</h2>
     <div>
-        <button type="button" ng-click="create()">Create</button>
+        <!--<button type="button" ng-click="create()">Create</button>-->
+        <button type="button" ng-click="create({{ currentGame[0].id }})">{{ currentGame[0].nickname }}</button>
+        <button type="button" ng-click="create({{ currentGame[1].id }})">{{ currentGame[1].nickname }}</button>
+        <button type="button" ng-click="create({{ currentGame[4].id }})">{{ currentGame[4].nickname }}</button>
+        <button type="button" ng-click="create({{ currentGame[5].id }})">{{ currentGame[5].nickname }}</button>
     </div>
 
     <form name="scoreForm" ng-submit="save()" ng-hide="scoreEdit == null">
         <fieldset>
-            <div>
-                <label for="player">Player: </label>
-                <select id="player" ng-model="scoreEdit.player" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
-            </div>
-            <div>
-                <label for="game">Game ID: </label>
-                <input id="game" type="text" ng-model="scoreEdit.game" required/>
-            </div>
+            <input id="game" type="hidden" ng-model="scoreEdit.game" required/>
+
+            <input id="player" type="text" ng-model="scoreEdit.player" required/>
+            <!--<div>-->
+                <!--<label for="player">Player: </label>-->
+                <!--<select id="player" ng-model="scoreEdit.player" ng-options="player.id as player.nickname for player in availablePlayers" required></select>-->
+            <!--</div>-->
             <div>
                 <label for="own_goal">Own Goal: </label>
                 <input id="own_goal" type="checkbox" ng-model="scoreEdit.own_goal" />
@@ -26,7 +29,12 @@
     <ol>
         <li ng-repeat="score in gameScores">
             <div>
-                {{ score <!--| playerDisplay--> }}
+                <span>
+                    <span>{{ score.player.nickname }}</span>
+                    <span> scored for </span>
+                    <span>{{ score.team }} team</span>
+                    <span ng-show="score.own_goal">(own goal)</span>
+                </span>
                 <span><a title="Edit" href="" ng-click="edit($index)">Edit</a></span>
             </div>
         </li>

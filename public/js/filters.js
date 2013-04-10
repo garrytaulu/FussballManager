@@ -2,14 +2,14 @@
 
 angular.module('fm.filters', [])
     /**
-     * Returns the player with the following format.
-     *
-     * {player.name} {player.nickname} {player.created_at | 'dd/MM/yyyy h:mm a'}
-     *
-     * Dependencies:
-     *
-     * $filter
-     */
+    * Returns the player with the following format.
+    *
+    * {player.name} {player.nickname} {player.created_at | 'dd/MM/yyyy h:mm a'}
+    *
+    * Dependencies:
+    *
+    * $filter
+    */
     .filter('playerDisplay', ['$filter', function($filter) {
         return function(player) {
             var result = "";
@@ -27,14 +27,14 @@ angular.module('fm.filters', [])
     }])
 
     /**
-      * Returns the Game with the following format.
-      *
-      * A: {game.blueAttacker.name} / D: {game.blueDefender.name}
-      *
-      * Dependencies:
-      *
-      * $filter
-      */
+    * Returns the Game with the following format.
+    *
+    * A: {game.blueAttacker.name} / D: {game.blueDefender.name}
+    *
+    * Dependencies:
+    *
+    * $filter
+    */
     .filter('gameBlueTeamDisplay', function() {
         return function(game) {
             var result = "";
@@ -48,14 +48,14 @@ angular.module('fm.filters', [])
     })
 
     /**
-     * Returns the Game with the following format.
-     *
-     * A: {game.redAttacker.name} / D: {game.redDefender.name}
-     *
-     * Dependencies:
-     *
-     * $filter
-     */
+    * Returns the Game with the following format.
+    *
+    * A: {game.redAttacker.name} / D: {game.redDefender.name}
+    *
+    * Dependencies:
+    *
+    * $filter
+    */
     .filter('gameRedTeamDisplay', function() {
         return function(game) {
             var result = "";
@@ -67,4 +67,5 @@ angular.module('fm.filters', [])
             return result;
         };
     })
+
 ;
