@@ -141,58 +141,30 @@ function GameDetailCtrl($scope, $routeParams, Player, Game, Score, ApiUtility)
     $scope.scoreEdit   = null;
     $scope.gameScores  = [];
     $scope.currentGame = null;
+    $scope.gamePlayers = [];
 
     // Fill in the recorded game scores
     Score.query({gameId:globals.scoresForGameId}, function(scores) {
         $scope.gameScores = scores;
     });
 
-//    $scope.create = function() {
-////          $scope.availablePlayers = $scope.getGamePlayers();
-//        Player.query(function(players) {
-//            $scope.availablePlayers = players;
-//        });
-//
-//        $scope.scoreEdit = new Score();
-//        $scope.scoreEdit.game = globals.scoresForGameId;
-//    };
-
-    $scope.create = function(playerId) {
-        console.debug('create playerId' + playerId);
+    $scope.create = function(playerId, playerName) {
+        console.debug('create by playerId');
         $scope.scoreEdit = new Score();
         $scope.scoreEdit.player = playerId;
         $scope.scoreEdit.game   = globals.scoresForGameId;
-    };
-
-//    $scope.getGamePlayers = function() {
-//        var result = [];
-//        result.push($scope.currentGame.blueAttacker);
-//        result.push($scope.currentGame.blueDefender);
-//        result.push($scope.currentGame.redAttacker);
-//        result.push($scope.currentGame.redDefender);
-//        return result;
-//    };
-
-    $scope.getCurrentGame = function() {
-        return Game.query({id: globals.scoresForGameId}, function (game) {
-            return game;
-        });
+        $scope.playerName = playerName;
     };
 
     $scope.edit = function(index) {
         $scope.master = $scope.gameScores[index];
         $scope.scoreEdit = angular.copy($scope.master);
 
-        // game and player are complex objs at this point,
+        // Game and Player are complex objects at this point,
         // however the select control (and the server)
         // require them to be IDs, so we flatten them out here
         $scope.scoreEdit.game   = $scope.scoreEdit.game.id;
         $scope.scoreEdit.player = $scope.scoreEdit.player.id;
-
-//        $scope.availablePlayers = $scope.getGamePlayers();
-        Player.query(function(players) {
-            $scope.availablePlayers = players;
-        });
     };
 
     $scope.save = function() {
@@ -214,7 +186,20 @@ function GameDetailCtrl($scope, $routeParams, Player, Game, Score, ApiUtility)
         $scope.scoreEdit = null;
     };
 
-    $scope.currentGame = $scope.getCurrentGame();
+    $scope.getCurrentGame = function() {
+        Game.get({id: globals.scoresForGameId}, function (game) {
+            $scope.currentGame = game;
+        });
+    };
+    $scope.getCurrentGame();
+
+//    $scope.getGamePlayers = function() {
+//        $scope.gamePlayers.push($scope.currentGame.blueAttacker);
+//        $scope.gamePlayers.push($scope.currentGame.blueDefender);
+//        $scope.gamePlayers.push($scope.currentGame.redAttacker);
+//        $scope.gamePlayers.push($scope.currentGame.redDefender);
+//    };
+//    $scope.getGamePlayers();
 }
 GameDetailCtrl.$inject = ['$scope', '$routeParams', 'Player', 'Game', 'Score', 'ApiUtility'];
 
