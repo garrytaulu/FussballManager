@@ -3,7 +3,7 @@
     <div class="span9">
       <h2>Fussball Manager Api Documentation</h2>
       <div class="alert alert-info">
-        To see resources formatted in json or xml append '.json' or '.xml' to the end of the uri.
+        To see resources formatted in json append '.json' to the end of the uri.
         <br/>
         <br/>
         <b>Example:</b> api/players.json or api/players/1.json
@@ -13,66 +13,49 @@
         <table class="table table-bordered">
           <thead>
           <tr>
-            <th>Path</th>
-            <th>HTTP Verb</th>
-            <th>Action</th>
+            <th>Uri</th>
+            <th>HTTP Verb's</th>
             <th>Description</th>
           </tr>
           </thead>
           <tbody>
           <tr>
             <td>
-              <a title="Go to players resource" href="/api/players">/players</a>
+              <%= link_to '/players', players_path, :title => 'Go to players' %>
             </td>
-            <td class="small-column">GET</td>
-            <td class="small-column">index</td>
+            <td>GET</td>
             <td>Returns a list of all the players.</td>
           </tr>
           <tr>
-            <td>/players/new</td>
-            <td>GET</td>
-            <td>new</td>
-            <td>Returns a HTML form to create a player resource.</td>
-          </tr>
-          <tr>
-            <td>/players</td>
+            <td>
+              <%= link_to '/players', new_player_path, :title => 'Create a new player' %>
+            </td>
             <td>POST</td>
-            <td>create</td>
-            <td>Creates a new player resource.</td>
+            <td>Creates a new player.</td>
           </tr>
           <tr>
             <td>/players/:id</td>
             <td>GET</td>
-            <td>show</td>
-            <td>Returns a player resource.</td>
-          </tr>
-          <tr>
-            <td>/players/:id/edit</td>
-            <td>GET</td>
-            <td>edit</td>
-            <td>Returns a HTML form for editing a player resource.</td>
+            <td>Returns a player.</td>
           </tr>
           <tr>
             <td>/players/:id</td>
             <td>PUT</td>
-            <td>update</td>
-            <td>Updates a player resource.</td>
+            <td>Updates a player.</td>
           </tr>
           <tr>
             <td>/players/:id</td>
             <td>DELETE</td>
-            <td>destroy</td>
-            <td>Removes a player resource.</td>
+            <td>Removes a player.</td>
           </tr>
           <tr>
             <td colspan="4">
-              <h4>Tallies sub resource</h4>
+              <h4>Tallies Resource</h4>
             </td>
           </tr>
           <tr>
             <td>/players/:player_id/tallies</td>
             <td>GET</td>
-            <td>index</td>
             <td>Returns the tally of a players score.</td>
           </tr>
           </tbody>
@@ -83,113 +66,79 @@
         <table class="table table-bordered">
           <thead>
           <tr>
-            <th>Path</th>
-            <th>HTTP Verb</th>
-            <th>Action</th>
+            <th>Uri</th>
+            <th>HTTP Verb's</th>
             <th>Description</th>
           </tr>
           </thead>
           <tbody>
           <tr>
             <td>
-              <a title="Go to games resource" href="/api/games">/games</a>
+              <%= link_to '/games', games_path, :title => 'Go to games' %>
             </td>
             <td>GET</td>
-            <td>index</td>
             <td>Returns a list of all the games.</td>
           </tr>
           <tr>
-            <td>/games/new</td>
-            <td>GET</td>
-            <td>new</td>
-            <td>Returns a HTML form to create a game resource.</td>
-          </tr>
-          <tr>
-            <td>/games</td>
+            <td>
+              <%= link_to '/games', new_game_path, :title => 'Create a new game' %>
+            </td>
             <td>POST</td>
-            <td>create</td>
-            <td>Creates a new game resource.</td>
+            <td>Creates a new game.</td>
           </tr>
           <tr>
             <td>/games/:id</td>
             <td>GET</td>
-            <td>show</td>
-            <td>Returns a game resource.</td>
-          </tr>
-          <tr>
-            <td>/games/:id/edit</td>
-            <td>GET</td>
-            <td>edit</td>
-            <td>Returns a HTML form for editing a game resource.</td>
+            <td>Returns a game.</td>
           </tr>
           <tr>
             <td>/games/:id</td>
             <td>PUT</td>
-            <td>update</td>
-            <td>Updates a game resource.</td>
+            <td>Updates a game.</td>
           </tr>
           <tr>
             <td>/games/:id</td>
             <td>DELETE</td>
-            <td>destroy</td>
-            <td>Removes a game resource.</td>
+            <td>Removes a game.</td>
           </tr>
           <tr>
             <td colspan="4">
-              <h4>Scores sub resource</h4>
+              <h4>Scores Resource</h4>
             </td>
           </tr>
           <tr>
             <td>/games/:game_id/scores</td>
             <td>GET</td>
-            <td>index</td>
-            <td>Returns a list of all the score resources for a game resource.</td>
-          </tr>
-          <tr>
-            <td>/games/:game_id/scores/new</td>
-            <td>GET</td>
-            <td>new</td>
-            <td>Returns a HTML form to create a new score resource for a game resource.</td>
+            <td>Returns a list of all the scores form a game.</td>
           </tr>
           <tr>
             <td>/games/:game_id/scores</td>
             <td>POST</td>
-            <td>create</td>
-            <td>Creates a new score resource for a game resource.</td>
+            <td>Creates a new score for a game.</td>
           </tr>
           <tr>
             <td>/games/:game_id/scores/:id</td>
             <td>GET</td>
-            <td>show</td>
-            <td>Returns a score resource from a game resource.</td>
-          </tr>
-          <tr>
-            <td>/games/:game_id/scores/:id/edit</td>
-            <td>GET</td>
-            <td>edit</td>
-            <td>Returns a HTML form for editing a score resource on a game resource.</td>
+            <td>Returns a score from a game.</td>
           </tr>
           <tr>
             <td>/games/:game_id/scores/:id</td>
             <td>PUT</td>
-            <td>update</td>
-            <td>Updates a score resource on a game resource.</td>
+            <td>Updates a score on a game.</td>
           </tr>
           <tr>
             <td>/games/:game_id/scores/:id</td>
             <td>DELETE</td>
-            <td>destroy</td>
-            <td>Removes a score resource on a game resource.</td>
+            <td>Removes a score from a game.</td>
           </tr>
           <tr>
             <td colspan="4">
-              <h4>Tallies sub resource</h4>
+              <h4>Tallies Resource</h4>
             </td>
           </tr>
           <tr>
             <td>/games/:game_id/tallies</td>
             <td>GET</td>
-            <td>index</td>
             <td>Returns the tally of a games score.</td>
           </tr>
           </tbody>
