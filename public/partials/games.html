@@ -9,21 +9,21 @@
             <span>Blue</span>
             <div>
                 <label for="blueAttacker">Attacker: </label>
-                <select id="blueAttacker" ng-model="gameEdit.blueAttacker" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
+                <select id="blueAttacker" ng-model="gameEdit.blueAttacker" ng-options="p as p.nickname for p in availablePlayers" required></select>
             </div>
             <div>
                 <label for="blueDefender">Defender: </label>
-                <select id="blueDefender" ng-model="gameEdit.blueDefender" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
+                <select id="blueDefender" ng-model="gameEdit.blueDefender" ng-options="p as p.nickname for p in availablePlayers" required></select>
             </div>
 
             <span>Red</span>
             <div>
                 <label for="redDefender">Attacker: </label>
-                <select id="redAttacker" ng-model="gameEdit.redAttacker" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
+                <select id="redAttacker" ng-model="gameEdit.redAttacker" ng-options="p as p.nickname for p in availablePlayers" required></select>
             </div>
             <div>
                 <label for="redDefender">Defender: </label>
-                <select id="redDefender" ng-model="gameEdit.redDefender" ng-options="player.id as player.nickname for player in availablePlayers" required></select>
+                <select id="redDefender" ng-model="gameEdit.redDefender" ng-options="p as p.nickname for p in availablePlayers" required></select>
             </div>
             <button type="submit">Save</button>
             <button type="button" ng-click="cancel()">Cancel</button>

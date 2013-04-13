@@ -18,9 +18,9 @@ angular.module('fm.services', ['ngResource'])
                 'create': { method:'POST' },
                 'update': { method:'PUT' },
                 'query' : { method:'GET', isArray:true },
-                'delete': { method:'DELETE'
+                'delete': { method:'DELETE' }
             }
-        });
+        );
     }])
 
     /**
@@ -53,8 +53,8 @@ angular.module('fm.services', ['ngResource'])
      */
     .factory('Score', ['$resource', function($resource){
         return $resource(
-            Globals.apiBaseUri + 'api/games/:gameId/scores/:scoreId'
-            , {gameId:4, scoreId: '@id'}
+            Globals.apiBaseUri + 'api/games/:game/scores/:id'
+            , {game:'@game.id', id: '@id'}
             , {
                 'get'   : { method:'GET' },
                 'create': { method:'POST' },
@@ -66,7 +66,7 @@ angular.module('fm.services', ['ngResource'])
     }])
 
     /**
-     * An api utility service with some handy methods for calling the api resources.
+     * An api utility service with some handy methods for calling api resources.
      */
     .factory('ApiUtility', [function() {
 
@@ -83,7 +83,11 @@ angular.module('fm.services', ['ngResource'])
 
             resource['$' + methodToCall](function(result) {
 
-                successCallback(methodToCall, result);
+                if (typeof result != 'undefined' && result != null) {
+                    resource.id = result.id;
+                }
+
+                successCallback(methodToCall);
 
             }, function(error) {
 

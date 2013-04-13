@@ -19,7 +19,6 @@
           <th>Game</th>
           <th>Player</th>
           <th>Own goal</th>
-          <th>Team</th>
           <th></th>
         </tr>
         </thead>
@@ -30,7 +29,6 @@
             <td><%= score.game.id %></td>
             <td><%= score.player.name %></td>
             <td><%= score.own_goal && 'Yes' || 'No' %></td>
-            <td><%= score.team %></td>
             <td>
               <%= link_to 'Edit', edit_game_score_path(score.game, score), :class => 'btn btn-mini btn-success' %>
               <%= link_to 'Destroy', game_score_path(score.game, score), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>

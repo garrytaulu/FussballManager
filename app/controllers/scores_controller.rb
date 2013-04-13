@@ -52,15 +52,14 @@ class ScoresController < ApplicationController
   def create
     @score = Score.new
     @score.game = Game.find(params[:game_id])
-    @score.player = Player.find(params[:score][:player])
-    @score.own_goal = params[:score][:own_goal]
+    @score.player = Player.find(params[:player][:id])
+    @score.own_goal = params[:own_goal]
 
-    set_team(@score)
     @score.save
 
     respond_to do |format|
       format.html do
-        redirect_to game_score_path([@score.game, @score])
+        redirect_to game_score_path(@score.game, @score)
       end
       format.json do
         render :status => :created,
@@ -74,10 +73,9 @@ class ScoresController < ApplicationController
   # PUT games/1/scores/1.json
   def update
     @score = Score.find(params[:id])
-    @score.player = Player.find(params[:score][:player])
-    @score.own_goal = params[:score][:own_goal]
+    @score.player = Player.find(params[:player][:id])
+    @score.own_goal = params[:own_goal]
 
-    set_team(@score)
     @score.save
 
     respond_to do |format|
@@ -103,27 +101,6 @@ class ScoresController < ApplicationController
       format.json do
         render :nothing => true
       end
-    end
-  end
-
-  private
-
-  def set_team(score)
-
-    return unless score
-
-    # work out which team scored by first
-    # checking if its a blue player
-    flag = score.player.id == score.game.blueAttacker.id ||
-        score.player.id == score.game.blueDefender.id
-
-    # if it's an own goal then flip flag otherwise do nothing
-    flag = score.own_goal && !flag
-
-    if flag
-      score.team = 'blue'
-    else
-      score.team = 'red'
     end
   end
 end

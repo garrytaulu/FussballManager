@@ -1,36 +1,19 @@
 <div class="container">
-
     <div>
-        <div class="">
-            <div style="float:left;">
-                <button type="button" class="teamBlue" ng-click="create(currentGame.blueAttacker.id, currentGame.blueAttacker.nickname)">{{ currentGame.blueAttacker.nickname }}</button>
-            </div>
-            <div style="float:left;">
-                <button type="button" class="teamBlue" ng-click="create(currentGame.blueDefender.id, currentGame.blueDefender.nickname)">{{ currentGame.blueDefender.nickname }}</button>
-            </div>
-            <div style="clear:both;"></div>
-        </div>
-
-        <div></div>
-
-        <div class="">
-            <div style="float:left;">
-                <button type="button" class="teamRed" ng-click="create(currentGame.redAttacker.id, currentGame.redAttacker.nickname)">{{ currentGame.redAttacker.nickname }}</button>
-            </div>
-            <div style="float:left;">
-                <button type="button" class="teamRed" ng-click="create(currentGame.redDefender.id, currentGame.redDefender.nickname)">{{ currentGame.redDefender.nickname }}</button>
-            </div>
-            <div style="clear:both;"></div>
-        </div>
+        <button type="button" class="teamBlue" ng-click="create(game.blueAttacker)">{{ game.blueAttacker.nickname }}</button>
+        <button type="button" class="teamBlue" ng-click="create(game.blueDefender)">{{ game.blueDefender.nickname }}</button>
     </div>
-    <div style="clear:both;"></div>
+    <div>
+        <button type="button" class="teamRed" ng-click="create(game.redAttacker)">{{ game.redAttacker.nickname }}</button>
+        <button type="button" class="teamRed" ng-click="create(game.redDefender)">{{ game.redDefender.nickname }}</button>
+    </div>
 
     <form name="scoreForm" ng-submit="save()" ng-hide="scoreEdit == null">
         <fieldset>
             <input id="game" type="hidden" ng-model="scoreEdit.game" required/>
             <input id="player" type="hidden" ng-model="scoreEdit.player" required/>
 
-            <span style="font-size:16pt;font-weight:bold;">{{ playerName }}</span>
+            <span style="font-size:16pt;font-weight:bold;">{{ scoreEdit.player.name }}</span>
 
             <!--<div>-->
                 <!--<label for="player">Player: </label>-->
@@ -40,9 +23,7 @@
             <br/>
             <div>
                 <div style="float:right;">
-                    <input id="own_goal" type="checkbox" ng-model="scoreEdit.own_goal" />
-                    &nbsp;
-                    <label for="own_goal">own goal</label>
+                    <label style="width:82px"><input type="checkbox" ng-model="scoreEdit.own_goal" /> own goal</label>
                 </div>
                 <div style="clear:both;"></div>
             </div>
@@ -57,13 +38,8 @@
     <ol>
         <li ng-repeat="score in gameScores">
             <div>
-                <span>
-                    <span>{{ score.player.nickname }}</span>
-                    <span> scored for </span>
-                    <span>{{ score.team }} team</span>
-                    <span ng-show="score.own_goal">(own goal)</span>
-                </span>
-                <span><a title="Edit" href="" ng-click="edit($index)">Edit</a></span>
+                {{score | scoreDisplay }}
+                <a title="Edit" href="" ng-click="edit($index)">Edit</a>
             </div>
         </li>
     </ol>

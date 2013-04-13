@@ -34,10 +34,10 @@ class GamesController < ApplicationController
   def create
     @game = Game.new
 
-    @game.blueAttacker = Player.find(params[:game][:blueAttacker])
-    @game.blueDefender = Player.find(params[:game][:blueDefender])
-    @game.redAttacker = Player.find(params[:game][:redAttacker])
-    @game.redDefender = Player.find(params[:game][:redDefender])
+    @game.blueAttacker = Player.find(params[:blueAttacker][:id])
+    @game.blueDefender = Player.find(params[:blueDefender][:id])
+    @game.redAttacker = Player.find(params[:redAttacker][:id])
+    @game.redDefender = Player.find(params[:redDefender][:id])
 
     @game.save
 
@@ -49,10 +49,10 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
 
-    @game.blueAttacker = Player.find(params[:game][:blueAttacker])
-    @game.blueDefender = Player.find(params[:game][:blueDefender])
-    @game.redAttacker = Player.find(params[:game][:redAttacker])
-    @game.redDefender = Player.find(params[:game][:redDefender])
+    @game.blueAttacker = Player.find(params[:blueAttacker][:id])
+    @game.blueDefender = Player.find(params[:blueDefender][:id])
+    @game.redAttacker = Player.find(params[:redAttacker][:id])
+    @game.redDefender = Player.find(params[:redDefender][:id])
 
     @game.save
 
@@ -65,10 +65,29 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     scores = Score.find_all_by_game(@game.id)
 
-    if scores && scores.count == 0
+    if scores.count == 0
       @game.destroy
-    end
 
-    respond_with @game
+      respond_to do |format|
+        format.html do
+          redirect_to games_path
+        end
+        format.json do
+          render :nothing => true
+        end
+      end
+    else
+      respond_to do |format|
+        format.html do
+          redirect_to games_path
+        end
+        format.json do
+          render :status => :conflict, :json => {
+              :code => 1,
+              :message => "Can't remove game because it has scores."
+          }
+        end
+      end
+    end
   end
 end

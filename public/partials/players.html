@@ -16,7 +16,7 @@
             </div>
             <div>
                 <label for="avatar">Avatar: </label>
-                <input id="avatar" type="text" ng-model="playerEdit.avatar" required ng-pattern="/.png$/"/>
+                <input id="avatar" type="text" ng-model="playerEdit.avatar" required/>
             </div>
             <button type="submit">Save</button>
             <button type="button" ng-click="cancel()">Cancel</button>
@@ -26,7 +26,7 @@
     <ol>
         <li ng-repeat="player in players">
             <div>
-                {{ player | playerDisplay }}
+                {{ player.nickname }}
                 <span><a title="Edit" href="" ng-click="edit($index)">Edit</a></span>
             </div>
         </li>

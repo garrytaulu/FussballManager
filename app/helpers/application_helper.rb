@@ -15,7 +15,7 @@ module ApplicationHelper
         players,
         :id,
         :name,
-        {:selected => resource[method] && resource[method] || nil, :include_blank => true},
+        {:selected => resource[object] && resource[object] || nil, :include_blank => true},
         :required => required
     )
   end

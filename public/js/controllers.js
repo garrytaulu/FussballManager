@@ -1,29 +1,23 @@
 'use strict';
 
-function MainCtrl($scope, $location, Player, Game)
-{
-    $scope.location = $location;
-
+function MainCtrl($scope, Player, Game) {
     $scope.players = [];
+    $scope.games = [];
 
     Player.query(function(result) {
         $scope.players = result;
     });
 
-    $scope.games = [];
-
     Game.query(function(result) {
         $scope.games = result;
     });
-}
+} MainCtrl.$inject = ['$scope', 'Player', 'Game'];
 
-MainCtrl.$inject = ['$scope', '$location', 'Player', 'Game'];
+/**
+ * Controller is mapped to route: /players
+ */
+function PlayersCtrl($scope, Player, ApiUtility) {
 
-/* *********************** */
-/* ** PLAYER ************* */
-/* *********************** */
-function PlayersCtrl($scope, Player, ApiUtility)
-{
     $scope.master = {};
     $scope.playerEdit = null;
 
@@ -37,13 +31,14 @@ function PlayersCtrl($scope, Player, ApiUtility)
     };
 
     $scope.save = function() {
-        ApiUtility.upsert($scope.playerEdit, function(type, updatedResource) {
+        var player = angular.copy($scope.playerEdit);
+        ApiUtility.upsert(player, function(type) {
             if (type == 'create') {
-                $scope.players.push(updatedResource);
+                $scope.players.push(player);
             } else {
                 var index = $scope.players.indexOf($scope.master);
                 if (index > -1) {
-                    $scope.players[index] = updatedResource;
+                    $scope.players[index] = player;
                 }
             }
 
@@ -52,7 +47,7 @@ function PlayersCtrl($scope, Player, ApiUtility)
     };
 
     $scope.delete = function(index, player) {
-        player['$delete'](function() {
+        player.$delete(function() {
             $scope.players.splice(index, 1);
         });
     };
@@ -60,31 +55,31 @@ function PlayersCtrl($scope, Player, ApiUtility)
     $scope.cancel = function() {
         $scope.playerEdit = null;
     };
-}
 
-PlayersCtrl.$inject = ['$scope', 'Player', 'ApiUtility'];
+} PlayersCtrl.$inject = ['$scope', 'Player', 'ApiUtility'];
 
 /* *********************** */
 /* ** NAVIGATION ********* */
 /* *********************** */
-function AppNavigationCtrl($scope)
-{
+function AppNavigationCtrl($scope) {
+
 }
 AppNavigationCtrl.$inject = ['$scope'];
 
-/* *********************** */
-/* ** GAME *************** */
-/* *********************** */
-function GamesCtrl($scope, Player, Game, ApiUtility)
-{
+/**
+ * Controller is mapped to route: /games
+ */
+function GamesCtrl($scope, Player, Game, ApiUtility) {
+
     $scope.master = {};
     $scope.gameEdit = null;
 
-    $scope.create = function() {
-        Player.query(function(players) {
-            $scope.availablePlayers = players;
-        });
+    // Fill in the available players
+    Player.query(function(players) {
+        $scope.availablePlayers = players;
+    });
 
+    $scope.create = function() {
         $scope.gameEdit = new Game();
     };
 
@@ -92,28 +87,34 @@ function GamesCtrl($scope, Player, Game, ApiUtility)
         $scope.master = $scope.games[index];
         $scope.gameEdit = angular.copy($scope.master);
 
-        // blueAttacker, blueDefender, redAttacker and redDefender are
-        // complex objs at this point, however the select control
-        // (and the server) require them to be IDs, so we flatten them out here
-        $scope.gameEdit.blueAttacker = $scope.gameEdit.blueAttacker.id;
-        $scope.gameEdit.blueDefender = $scope.gameEdit.blueDefender.id;
-        $scope.gameEdit.redAttacker  = $scope.gameEdit.redAttacker.id;
-        $scope.gameEdit.redDefender  = $scope.gameEdit.redDefender.id;
-
-        // Fill in the available players
-        Player.query(function(players) {
-            $scope.availablePlayers = players;
-        });
+        // update the player references to reference players in the availablePlayers list.
+        for (var i = 0; i < $scope.availablePlayers.length;i++) {
+            switch($scope.availablePlayers[i].id) {
+                case $scope.gameEdit.blueAttacker.id:
+                    $scope.gameEdit.blueAttacker = $scope.availablePlayers[i];
+                    break;
+                case $scope.gameEdit.redAttacker.id:
+                    $scope.gameEdit.redAttacker = $scope.availablePlayers[i];
+                    break;
+                case $scope.gameEdit.blueDefender.id:
+                    $scope.gameEdit.blueDefender = $scope.availablePlayers[i];
+                    break;
+                case $scope.gameEdit.redDefender.id:
+                    $scope.gameEdit.redDefender = $scope.availablePlayers[i];
+                    break;
+            }
+        }
     };
 
     $scope.save = function() {
-        ApiUtility.upsert($scope.gameEdit, function(type, updatedResource) {
+        var game = angular.copy($scope.gameEdit);
+        ApiUtility.upsert(game, function(type) {
             if (type == 'create') {
-                $scope.games.push(updatedResource);
+                $scope.games.push(game);
             } else {
                 var index = $scope.games.indexOf($scope.master);
                 if (index > -1) {
-                    $scope.games[index] = updatedResource;
+                    $scope.games[index] = game;
                 }
             }
 
@@ -122,7 +123,7 @@ function GamesCtrl($scope, Player, Game, ApiUtility)
     };
 
     $scope.delete = function(index, game) {
-        game['$delete'](function() {
+        game.$delete(function() {
             $scope.games.splice(index, 1);
         });
     };
@@ -130,51 +131,52 @@ function GamesCtrl($scope, Player, Game, ApiUtility)
     $scope.cancel = function() {
         $scope.gameEdit = null;
     };
-}
-GamesCtrl.$inject = ['$scope', 'Player', 'Game', 'ApiUtility'];
 
-function GameDetailCtrl($scope, $routeParams, Player, Game, Score, ApiUtility)
-{
-    globals.scoresForGameId = $routeParams.gameId;
+} GamesCtrl.$inject = ['$scope', 'Player', 'Game', 'ApiUtility'];
+
+/**
+ * Controller is mapped to route: /games/:game
+ */
+function GameDetailCtrl($scope, $routeParams, Game, Score, ApiUtility) {
 
     $scope.master      = {};
     $scope.scoreEdit   = null;
     $scope.gameScores  = [];
-    $scope.currentGame = null;
+    $scope.game = null;
     $scope.gamePlayers = [];
 
+    // get the selected game
+    Game.get({id: $routeParams.game}, function(game) {
+        $scope.game = game;
+    });
+
     // Fill in the recorded game scores
-    Score.query({gameId:globals.scoresForGameId}, function(scores) {
+    Score.query({game:$routeParams.game}, function(scores) {
         $scope.gameScores = scores;
     });
 
-    $scope.create = function(playerId, playerName) {
-        console.debug('create by playerId');
-        $scope.scoreEdit = new Score();
-        $scope.scoreEdit.player = playerId;
-        $scope.scoreEdit.game   = globals.scoresForGameId;
-        $scope.playerName = playerName;
+    $scope.create = function(player) {
+        $scope.scoreEdit = new Score({
+            game: $scope.game,
+            player: player,
+            own_goal: false
+        });
     };
 
     $scope.edit = function(index) {
         $scope.master = $scope.gameScores[index];
         $scope.scoreEdit = angular.copy($scope.master);
-
-        // Game and Player are complex objects at this point,
-        // however the select control (and the server)
-        // require them to be IDs, so we flatten them out here
-        $scope.scoreEdit.game   = $scope.scoreEdit.game.id;
-        $scope.scoreEdit.player = $scope.scoreEdit.player.id;
     };
 
     $scope.save = function() {
-        ApiUtility.upsert($scope.scoreEdit, function(type, updatedResource) {
+        var score = angular.copy($scope.scoreEdit);
+        ApiUtility.upsert(score, function(type) {
             if (type == 'create') {
-                $scope.gameScores.push(updatedResource);
+                $scope.gameScores.push(score);
             } else {
                 var index = $scope.gameScores.indexOf($scope.master);
                 if (index > -1) {
-                    $scope.gameScores[index] = updatedResource;
+                    $scope.gameScores[index] = score;
                 }
             }
 
@@ -185,25 +187,8 @@ function GameDetailCtrl($scope, $routeParams, Player, Game, Score, ApiUtility)
     $scope.cancel = function() {
         $scope.scoreEdit = null;
     };
+} GameDetailCtrl.$inject = ['$scope', '$routeParams', 'Game', 'Score', 'ApiUtility'];
 
-    $scope.getCurrentGame = function() {
-        Game.get({id: globals.scoresForGameId}, function (game) {
-            $scope.currentGame = game;
-        });
-    };
-    $scope.getCurrentGame();
+function HomeCtrl($scope) {
 
-//    $scope.getGamePlayers = function() {
-//        $scope.gamePlayers.push($scope.currentGame.blueAttacker);
-//        $scope.gamePlayers.push($scope.currentGame.blueDefender);
-//        $scope.gamePlayers.push($scope.currentGame.redAttacker);
-//        $scope.gamePlayers.push($scope.currentGame.redDefender);
-//    };
-//    $scope.getGamePlayers();
-}
-GameDetailCtrl.$inject = ['$scope', '$routeParams', 'Player', 'Game', 'Score', 'ApiUtility'];
-
-function HomeCtrl($scope)
-{
-}
-HomeCtrl.$inject = ['$scope'];
+} HomeCtrl.$inject = ['$scope'];

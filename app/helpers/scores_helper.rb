@@ -9,7 +9,7 @@ module ScoresHelper
         players,
         :id,
         :name,
-        {:selected => score[method] && score[method] || '',
+        {:selected => score[object] && score[object] || '',
         :include_blank => true},
         :required => required
     )

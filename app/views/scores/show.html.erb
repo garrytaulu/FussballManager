@@ -16,9 +16,5 @@
   <b>Own goal:</b>
   <%= @score.own_goal && 'Yes' || 'No' %>
 </p>
-<p>
-  <b>Team:</b>
-  <%= @score.team || '' %>
-</p>
 
 <%= link_to 'Back to game scores', game_scores_path %>
