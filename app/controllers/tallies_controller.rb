@@ -3,7 +3,8 @@ class TalliesController < ApplicationController
   # GET games/1/tallies
   # GET games/1/tallies.json
   def game_index
-    scores = Score.find_all_by_game(params[:game_id], :order => 'created_at asc')
+    game = Game.find(params[:game_id])
+    scores = Score.find_all_by_game(game.id, :order => 'created_at asc')
     @tallies = GameTally.new(scores)
 
     respond_with @tallies
@@ -13,7 +14,7 @@ class TalliesController < ApplicationController
   # GET players/1/tallies.json
   def player_index
     player = Player.find(params[:player_id])
-    scores = Score.find_all_by_player(params[:player_id], :order => 'game, created_at asc')
+    scores = Score.find_all_by_player(player.id, :order => 'game, created_at asc')
     @tallies = PlayerTally.new(player, scores)
 
     respond_with @tallies

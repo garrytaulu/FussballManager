@@ -32,6 +32,9 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
+
+    # TODO: And a check to make sure the players are unique for the game.
+
     @game = Game.new
 
     @game.blueAttacker = Player.find(params[:blueAttacker][:id])
@@ -41,12 +44,24 @@ class GamesController < ApplicationController
 
     @game.save
 
-    respond_with @game
+    respond_to do |format|
+      format.html do
+        redirect_to game_path(@game)
+      end
+      format.json do
+        render :status => :created,
+               :location => game_path(@game),
+               :json => {:id => @game.id }
+      end
+    end
   end
 
   # PUT /games/1
   # PUT /games/1.json
   def update
+
+    # TODO: And a check to make sure the players are unique for the game.
+
     @game = Game.find(params[:id])
 
     @game.blueAttacker = Player.find(params[:blueAttacker][:id])
@@ -56,7 +71,14 @@ class GamesController < ApplicationController
 
     @game.save
 
-    respond_with @game
+    respond_to do |format|
+      format.html do
+        redirect_to game_path(@game)
+      end
+      format.json do
+        render :nothing => true
+      end
+    end
   end
 
   # DELETE /games/1

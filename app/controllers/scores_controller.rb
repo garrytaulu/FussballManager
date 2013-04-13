@@ -26,25 +26,11 @@ class ScoresController < ApplicationController
   def new
     @score = Score.new
     @score.game = Game.find(params[:game_id])
-
-    respond_to do |format|
-      format.html
-      format.json do
-        render :status => :not_found
-      end
-    end
   end
 
   # GET games/1/scores/1/edit
   def edit
     @score = Score.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.json do
-        render :status => :not_found
-      end
-    end
   end
 
   # POST games/1/scores
