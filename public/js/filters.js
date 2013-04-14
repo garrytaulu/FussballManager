@@ -38,21 +38,21 @@ angular.module('fm.filters', [])
 /**
  * Returns the score in the following format.
  *
- * (own goal)
+ * {player.nickname} scored for {teamName} team (own goal)
  */
     .filter('scoreDisplay', [function() {
         return function(score) {
             var result = "";
 
             if (score) {
-                // work out which team scored.
-                var flag = score.player.id == score.game.blueAttacker.id
-                        || score.player.id == score.game.blueDefender.id
+                // work out which team scored
+                var isForBlueTeam = score.player.id == score.game.blueAttacker.id
+                        || score.player.id == score.game.blueDefender.id;
 
-                // if it's an own goal then flip flag.
-                flag = score.own_goal && !flag;
+                // if it's an own goal then flip the isForBlueTeam flag
+                isForBlueTeam = score.own_goal ? !isForBlueTeam : isForBlueTeam;
 
-                score.team = flag ? 'blue' : 'red';
+                score.team = isForBlueTeam ? 'blue' : 'red';
 
                 result = score.player.nickname + " scored for " + score.team + " team";
 
