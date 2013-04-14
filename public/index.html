@@ -3,8 +3,11 @@
 <head>
     <title>Fussball Manager</title>
 
+    <link href="/assets/application.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="/assets/api_index.css" media="all" rel="stylesheet" type="text/css" />
+
     <style>
-        form label { display: inline-block; width: 80px; }
+        /*form label { display: inline-block; width: 80px; }*/
         .container { display: inline-block; vertical-align: top; padding: 10px; }
         .resourceId { display:inline-block; visibility:hidden;}
 
@@ -12,21 +15,37 @@
         .teamRed {background-color:#9c4c42; color:white;}
 
         button {height:50px; width:150px;font-size:14pt;}
-
     </style>
 </head>
 <body ng-controller="MainCtrl">
 
-    <h1>Fussball Manager application</h1>
-
-    <!--class="container"-->
     <div ng-controller="AppNavigationCtrl">
-        <a href="#/home">Home</a>
-        <a href="#/games">Games</a>
-        <a href="#/players">Players</a>
+        <div class="container">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container" style="display:block;">
+                        <a class="brand" href="#">
+                            Fussball Manager
+                        </a>
+
+                        <div>
+                            <ul class="nav" ng-repeat="menuItem in menuItems">
+                                <li ng-class="{true:'active', false:''}[menuItem.isActive]" ng-click="updateMenu($index)">
+                                    <a href="{{ menuItem.href }}"><i class="{{ menuItem.iconClass }}"></i> {{ menuItem.label }}</a>
+                                </li>
+                            </ul>
+                        </div><!-- /.nav-collapse -->
+                    </div><!-- /.container -->
+                </div><!-- /.navbar-inner -->
+            </div><!-- /.navbar -->
+        </div>
     </div>
 
     <div ng-view></div>
+
+    <div id="footer" class="footer">
+        Powered by Heroku (with Ruby on Rails)
+    </div>
 
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="lib/angular.js"></script>

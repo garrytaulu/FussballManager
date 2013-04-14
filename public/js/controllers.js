@@ -62,9 +62,20 @@ function PlayersCtrl($scope, Player, ApiUtility) {
 /* ** NAVIGATION ********* */
 /* *********************** */
 function AppNavigationCtrl($scope) {
+    $scope.menuItems = [
+        {label:'Home', href:'#/home', iconClass:'icon-home', isActive:true},
+        {label:'Games', href:'#/games', iconClass:'icon-bell', isActive:false},
+        {label:'Players', href:'#/players', iconClass:'icon-user', isActive:false}
+    ];
 
-}
-AppNavigationCtrl.$inject = ['$scope'];
+    $scope.currentActiveIndex = 0;
+
+    $scope.updateMenu = function(index) {
+        $scope.menuItems[$scope.currentActiveIndex].isActive = false;
+        $scope.menuItems[index].isActive = true;
+        $scope.currentActiveIndex = index;
+    };
+} AppNavigationCtrl.$inject = ['$scope'];
 
 /**
  * Controller is mapped to route: /games
