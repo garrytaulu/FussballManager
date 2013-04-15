@@ -1,5 +1,7 @@
 class Game < ActiveRecord::Base
-  attr_accessible :id, :blueAttacker, :blueDefender, :redAttacker, :redDefender
+  attr_accessible :id, :blueAttacker, :blueDefender, :redAttacker, :redDefender, :status
+
+  validates_inclusion_of :status, :in => %w(created started paused finished)
 
   belongs_to :blueAttacker, :class_name => 'Player', :foreign_key => 'blueAttacker'
   belongs_to :blueDefender, :class_name => 'Player', :foreign_key => 'blueDefender'
@@ -7,4 +9,6 @@ class Game < ActiveRecord::Base
   belongs_to :redDefender, :class_name => 'Player', :foreign_key => 'redDefender'
 
   has_many :scores
+
+
 end

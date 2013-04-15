@@ -17,6 +17,7 @@
         <th>Blue Defender</th>
         <th>Red Attacker</th>
         <th>Red Defender</th>
+        <th>Status</th>
         <th></th>
       </tr>
       </thead>
@@ -27,6 +28,7 @@
             <td><%= game.blueDefender && game.blueDefender.name || '' %></td>
             <td><%= game.redAttacker && game.redAttacker.name || '' %></td>
             <td><%= game.redDefender && game.redDefender.name || '' %></td>
+            <td><%= game.status %></td>
             <td>
               <%= link_to 'Scores', game_scores_path(game), :class => 'btn btn-mini' %>
               <%= link_to 'Tallies', game, :class => 'btn btn-mini', :href => url_for(game) + '/tallies' %>

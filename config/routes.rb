@@ -7,6 +7,8 @@ FussballManager::Application.routes.draw do
     resources :games do
       resources :scores
       get :tallies, :to => 'tallies#game_index'
+      get :status, :to => 'games#get_status'
+      post :status, :to => 'games#update_status'
     end
   end
 

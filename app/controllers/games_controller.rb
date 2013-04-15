@@ -37,6 +37,7 @@ class GamesController < ApplicationController
 
     @game = Game.new
 
+    @game.status = GameStatusEnum.created
     @game.blueAttacker = Player.find(params[:blueAttacker][:id])
     @game.blueDefender = Player.find(params[:blueDefender][:id])
     @game.redAttacker = Player.find(params[:redAttacker][:id])
@@ -68,6 +69,7 @@ class GamesController < ApplicationController
     @game.blueDefender = Player.find(params[:blueDefender][:id])
     @game.redAttacker = Player.find(params[:redAttacker][:id])
     @game.redDefender = Player.find(params[:redDefender][:id])
+    @game.status = params[:status]
 
     @game.save
 
@@ -109,6 +111,52 @@ class GamesController < ApplicationController
               :message => "Can't remove game because it has scores."
           }
         end
+      end
+    end
+  end
+
+  # games/1/status
+  def get_status
+    game = Game.find(params[:game_id])
+
+    respond_with do |format|
+      format.html do
+        render :text => game.status
+      end
+      format.json do
+        render :json => {:status => game.status}
+      end
+    end
+  end
+
+  def update_status
+    game = Game.find(params[:game_id])
+
+    status = params[:status]
+    unless status && status != GameStatusEnum.created
+
+       game.status = status
+       game.save
+
+       respond_with do |format|
+         format.html do
+           render :nothing => true
+         end
+         format.json do
+           render :nothing => true
+         end
+       end
+    end
+
+    respond_with do |format|
+      format.html do
+        render :status => :bad_request, :text => 'The status provided is invalid. Only can be: created, started, paused or finished'
+      end
+      format.json do
+        render :status => :bad_request, :json => {
+            :code => 1,
+            :message => 'The status provided is invalid.'
+        }
       end
     end
   end
