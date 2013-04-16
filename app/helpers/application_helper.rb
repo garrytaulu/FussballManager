@@ -7,7 +7,7 @@ module ApplicationHelper
 
   # Generates a select element of players.
   def player_select(resource, object, method, required)
-    players = Player.all
+    players = Player.all(:order => 'name')
 
     collection_select(
         object,

@@ -19,4 +19,8 @@ class GameStatusEnum
   def self.all
     %w(created started paused finished)
   end
+
+  def self.all_except_created
+    %w(started paused finished)
+  end
 end

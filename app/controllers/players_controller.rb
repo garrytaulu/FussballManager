@@ -3,7 +3,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def index
-    @players = Player.all
+    @players = Player.all(:order => 'id')
 
     respond_with @players
   end

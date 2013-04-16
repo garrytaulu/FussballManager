@@ -29,7 +29,8 @@ table.last-with-buttons tr td:last-child {
   text-align: center;
 }
 
-table.last-with-buttons tr td:last-child a:not(:last-child) {
+table.last-with-buttons tr td:last-child a:not(:last-child),
+table.last-with-buttons tr td:last-child button:not(:last-child){
   margin-right:8px;
 }
 

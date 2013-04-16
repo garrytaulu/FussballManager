@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = Game.all(:order => 'id')
 
     respond_with @games
   end
@@ -33,8 +33,6 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
 
-    # TODO: And a check to make sure the players are unique for the game.
-
     @game = Game.new
 
     @game.status = GameStatusEnum.created
@@ -43,16 +41,31 @@ class GamesController < ApplicationController
     @game.redAttacker = Player.find(params[:redAttacker][:id])
     @game.redDefender = Player.find(params[:redDefender][:id])
 
-    @game.save
+    if @game.players_are_valid
+      @game.save
 
-    respond_to do |format|
-      format.html do
-        redirect_to game_path(@game)
+      respond_to do |format|
+        format.html do
+          redirect_to game_path(@game)
+        end
+        format.json do
+          render :status => :created,
+                 :location => game_path(@game),
+                 :json => {:id => @game.id }
+        end
       end
-      format.json do
-        render :status => :created,
-               :location => game_path(@game),
-               :json => {:id => @game.id }
+    else
+      respond_to do |format|
+        message = "You can't have the same player in multiple positions"
+        format.html do
+          render :status => :bad_request, :text => message
+        end
+        format.json do
+          render :status => :bad_request, :json => {
+              :code => 1,
+              :message => message
+          }
+        end
       end
     end
   end
@@ -60,8 +73,6 @@ class GamesController < ApplicationController
   # PUT /games/1
   # PUT /games/1.json
   def update
-
-    # TODO: And a check to make sure the players are unique for the game.
 
     @game = Game.find(params[:id])
 
@@ -71,14 +82,29 @@ class GamesController < ApplicationController
     @game.redDefender = Player.find(params[:redDefender][:id])
     @game.status = params[:status]
 
-    @game.save
+    if @game.players_are_valid
+      @game.save
 
-    respond_to do |format|
-      format.html do
-        redirect_to game_path(@game)
+      respond_to do |format|
+        format.html do
+          redirect_to game_path(@game)
+        end
+        format.json do
+          render :nothing => true
+        end
       end
-      format.json do
-        render :nothing => true
+    else
+      respond_to do |format|
+        message = "You can't have the same player in multiple positions"
+        format.html do
+          render :status => :bad_request, :text => message
+        end
+        format.json do
+          render :status => :bad_request, :json => {
+              :code => 1,
+              :message => message
+          }
+        end
       end
     end
   end
@@ -115,7 +141,8 @@ class GamesController < ApplicationController
     end
   end
 
-  # games/1/status
+  # GET games/1/status
+  # GET games/1/status.json
   def get_status
     game = Game.find(params[:game_id])
 
@@ -129,6 +156,7 @@ class GamesController < ApplicationController
     end
   end
 
+  # POST games/1/status
   def update_status
     game = Game.find(params[:game_id])
 
@@ -139,9 +167,6 @@ class GamesController < ApplicationController
        game.save
 
        respond_with do |format|
-         format.html do
-           render :nothing => true
-         end
          format.json do
            render :nothing => true
          end
@@ -149,9 +174,6 @@ class GamesController < ApplicationController
     end
 
     respond_with do |format|
-      format.html do
-        render :status => :bad_request, :text => 'The status provided is invalid. Only can be: created, started, paused or finished'
-      end
       format.json do
         render :status => :bad_request, :json => {
             :code => 1,
