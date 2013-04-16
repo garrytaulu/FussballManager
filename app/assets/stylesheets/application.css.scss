@@ -15,8 +15,18 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
-body {
-  padding: 20px;
+/*form label { display: inline-block; width: 80px; }*/
+.container { display: inline-block; vertical-align: top; padding: 10px; }
+
+.resourceId { display:inline-block; visibility:hidden;}
+
+.teamBlue {background-color:#6c91ff; color:white;}
+.teamRed {background-color:#9c4c42; color:white;}
+
+@media all and (mix-width: 1281px) {
+  body {
+    padding: 20px;
+  }
 }
 
 .footer {

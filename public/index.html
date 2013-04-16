@@ -3,49 +3,58 @@
 <head>
     <title>Fussball Manager</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="/assets/application.css" media="all" rel="stylesheet" type="text/css" />
     <link href="/assets/api_index.css" media="all" rel="stylesheet" type="text/css" />
-
-    <style>
-        /*form label { display: inline-block; width: 80px; }*/
-        .container { display: inline-block; vertical-align: top; padding: 10px; }
-        .resourceId { display:inline-block; visibility:hidden;}
-
-        .teamBlue {background-color:#6c91ff; color:white;}
-        .teamRed {background-color:#9c4c42; color:white;}
-
-        button {height:50px; width:150px;font-size:14pt;}
-    </style>
 </head>
 <body ng-controller="MainCtrl">
 
     <div ng-controller="AppNavigationCtrl">
-        <div class="container">
-            <div class="navbar">
+        <div class="container-fluid">
+            <div class="navbar  navbar-inverse"> <!--navbar-fixed-top-->
                 <div class="navbar-inner">
-                    <div class="container" style="display:block;">
-                        <a class="brand" href="#">
-                            Fussball Manager
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
                         </a>
 
-                        <div>
+                        <a class="brand" href="javascript:return false;">
+                            Fussball Manager
+                        </a>
+                        <div class="nav-collapse">
+                            <!--<ul class="nav">
+                                <li class="divider-vertical"></li>
+                            </ul>-->
                             <ul class="nav" ng-repeat="menuItem in menuItems">
                                 <li ng-class="{true:'active', false:''}[menuItem.isActive]" ng-click="updateMenu($index)">
                                     <a href="{{ menuItem.href }}"><i class="{{ menuItem.iconClass }}"></i> {{ menuItem.label }}</a>
                                 </li>
                             </ul>
-                        </div><!-- /.nav-collapse -->
-                    </div><!-- /.container -->
+                        </div>
+                    </div>
                 </div><!-- /.navbar-inner -->
             </div><!-- /.navbar -->
+
         </div>
+
+        <div class="container-fluid">
+            <div ng-view></div>
+        </div>
+
+        <div class="container-fluid">
+            <div id="footer" class="footer">
+                Powered by Heroku (with Ruby on Rails)
+            </div>
+        </div>
+
     </div>
 
-    <div ng-view></div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-    <div id="footer" class="footer">
-        Powered by Heroku (with Ruby on Rails)
-    </div>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="lib/angular.js"></script>
@@ -55,5 +64,6 @@
     <script type="text/javascript" src="js/directives.js"></script>
     <script type="text/javascript" src="js/filters.js"></script>
     <script type="text/javascript" src="js/services.js"></script>
+
 </body>
 </html>
