@@ -13,6 +13,7 @@
     <table class="table table-bordered last-with-buttons four">
       <thead>
       <tr>
+        <th>Id</th>
         <th>Blue Attacker</th>
         <th>Blue Defender</th>
         <th>Red Attacker</th>
@@ -24,6 +25,7 @@
       <tbody>
       <% @games.each do |game| %>
           <tr>
+            <td><%= game.id %></td>
             <td><%= game.blueAttacker && game.blueAttacker.name || '' %></td>
             <td><%= game.blueDefender && game.blueDefender.name || '' %></td>
             <td><%= game.redAttacker && game.redAttacker.name || '' %></td>
