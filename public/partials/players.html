@@ -1,7 +1,9 @@
 <div class="container">
     <h2>Players</h2>
     <div>
-        <button type="button" ng-click="create()">Create</button>
+        <a class="btn btn-primary" ng-click="create()">
+            <i class="icon-plus icon-white"></i> Create
+        </a>
     </div>
 
     <form name="playerForm" ng-submit="save()" ng-hide="playerEdit == null">
@@ -22,6 +24,8 @@
             <button type="button" ng-click="cancel()">Cancel</button>
         </fieldset>
     </form>
+
+    <br/>
 
     <ol>
         <li ng-repeat="player in players">
