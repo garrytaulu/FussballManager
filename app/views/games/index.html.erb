@@ -35,7 +35,7 @@
               <%= link_to 'Scores', game_scores_path(game), :class => 'btn btn-mini' %>
               <%= link_to 'Tallies', game, :class => 'btn btn-mini', :href => url_for(game) + '/tallies' %>
               <%= link_to 'Edit', edit_game_path(game), :class => 'btn btn-mini btn-success' %>
-              <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
+              <%= link_to 'Remove', game, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
             </td>
           </tr>
       <% end %>

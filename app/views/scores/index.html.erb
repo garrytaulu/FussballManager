@@ -31,7 +31,7 @@
             <td><%= score.own_goal && 'Yes' || 'No' %></td>
             <td>
               <%= link_to 'Edit', edit_game_score_path(score.game, score), :class => 'btn btn-mini btn-success' %>
-              <%= link_to 'Destroy', game_score_path(score.game, score), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
+              <%= link_to 'Remove', game_score_path(score.game, score), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
             </td>
           </tr>
       <% end %>
