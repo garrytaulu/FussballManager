@@ -7,11 +7,11 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag 'application', :media => 'all' %>
+  <%= stylesheet_link_tag 'api/application', :media => 'all' %>
   <%= yield(:head) %>
 </head>
 <body>
   <%= yield %>
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'api/application' %>
 </body>
 </html>
