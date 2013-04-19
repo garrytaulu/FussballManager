@@ -12,12 +12,8 @@
 //
 //= require ./main
 //= require jquery
-//= require jquery_ujs
 //= require twitter/bootstrap
 //= require angular
 //= require angular-resource
 //= require ./angular/app
-//= require_tree ./angular/controllers
-//= require_tree ./angular/directives
-//= require_tree ./angular/filters
-//= require_tree ./angular/services
+//= require_tree ./angular

@@ -83,7 +83,8 @@ angular.module('fm.services', ['ngResource'])
 
             resource['$' + methodToCall](function(result) {
 
-                if (typeof result != 'undefined' && result != null) {
+                if (typeof result != 'undefined' && result != null
+                 && typeof result.id != 'undefined' && result.id != null) {
                     resource.id = result.id;
                 }
 

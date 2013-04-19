@@ -91,7 +91,7 @@ function GamesCtrl($scope, Player, Game, ApiUtility) {
     });
 
     $scope.create = function() {
-        $scope.gameEdit = new Game();
+        $scope.gameEdit = new Game({status:'created'});
     };
 
     $scope.edit = function(index) {
@@ -201,6 +201,7 @@ function GameDetailCtrl($scope, $routeParams, Game, Score, ApiUtility) {
 
     $scope.changeToStatus = function(newStatus) {
         var game = angular.copy($scope.game);
+
         game.status = newStatus;
         ApiUtility.upsert(game, function() {
             $scope.game = game;
