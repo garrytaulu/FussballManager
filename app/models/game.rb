@@ -10,23 +10,19 @@ class Game < ActiveRecord::Base
 
   has_many :scores
 
-  # checks to see if the same player is in two positions.
+  # checks to see if the same player is on both sides.
   def players_are_valid
 
-    !(self.blueAttacker == self.blueDefender ||
-      self.blueAttacker == self.redAttacker ||
+    !(self.blueAttacker == self.redAttacker ||
       self.blueAttacker == self.redDefender ||
 
-      self.blueDefender == self.blueAttacker ||
       self.blueDefender == self.redAttacker ||
       self.blueDefender == self.redDefender ||
 
       self.redAttacker == self.blueAttacker ||
       self.redAttacker == self.blueDefender ||
-      self.redAttacker == self.redDefender ||
 
       self.redDefender == self.blueAttacker ||
-      self.redDefender == self.blueDefender ||
-      self.redDefender == self.redAttacker)
+      self.redDefender == self.blueDefender)
   end
 end

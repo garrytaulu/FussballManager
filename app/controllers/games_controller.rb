@@ -32,7 +32,6 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-
     @game = Game.new
 
     @game.status = GameStatusEnum.created
@@ -56,7 +55,7 @@ class GamesController < ApplicationController
       end
     else
       respond_to do |format|
-        message = "You can't have the same player in multiple positions"
+        message = "You can't have the same player on both sides"
         format.html do
           render :status => :bad_request, :text => message
         end
@@ -80,7 +79,28 @@ class GamesController < ApplicationController
     @game.blueDefender = Player.find(params[:blueDefender][:id])
     @game.redAttacker = Player.find(params[:redAttacker][:id])
     @game.redDefender = Player.find(params[:redDefender][:id])
-    @game.status = params[:status]
+
+
+    if @game.status != GameStatusEnum.created &&
+        params[:status] == GameStatusEnum.created
+
+      respond_to do |format|
+        message = "Can't set status back to 'created'"
+        format.html do
+          render :status => :conflict, :text => message
+        end
+        format.json do
+          render :status => :conflict, :json => {
+              :code => 1,
+              :message => message
+          }
+        end
+      end
+
+      return
+    else
+      @game.status = params[:status]
+    end
 
     if @game.players_are_valid
       @game.save
@@ -95,13 +115,13 @@ class GamesController < ApplicationController
       end
     else
       respond_to do |format|
-        message = "You can't have the same player in multiple positions"
+        message = "You can't have the same player on both sides"
         format.html do
           render :status => :bad_request, :text => message
         end
         format.json do
           render :status => :bad_request, :json => {
-              :code => 1,
+              :code => 2,
               :message => message
           }
         end
@@ -134,51 +154,9 @@ class GamesController < ApplicationController
         format.json do
           render :status => :conflict, :json => {
               :code => 1,
-              :message => "Can't remove game because it has scores."
+              :message => "Can't remove this game because it has scores"
           }
         end
-      end
-    end
-  end
-
-  # GET games/1/status
-  # GET games/1/status.json
-  def get_status
-    game = Game.find(params[:game_id])
-
-    respond_with do |format|
-      format.html do
-        render :text => game.status
-      end
-      format.json do
-        render :json => {:status => game.status}
-      end
-    end
-  end
-
-  # POST games/1/status
-  def update_status
-    game = Game.find(params[:game_id])
-
-    status = params[:status]
-    unless status && status != GameStatusEnum.created
-
-       game.status = status
-       game.save
-
-       respond_with do |format|
-         format.json do
-           render :nothing => true
-         end
-       end
-    end
-
-    respond_with do |format|
-      format.json do
-        render :status => :bad_request, :json => {
-            :code => 1,
-            :message => 'The status provided is invalid.'
-        }
       end
     end
   end

@@ -1,4 +1,6 @@
-<h2><%= yield(:title) %></h2>
+<h2>
+  <%= yield(:title) %>
+</h2>
 <% if @players_count >= 4 %>
     <%= form_for(@game) do |f| %>
         <div class="control-group">
@@ -25,11 +27,11 @@
             <%= player_select(@game, :redDefender, :id, true)%>
           </div>
         </div>
-        <% if @game.status != GameStatusEnum.finished && !@game.new_record? %>
+        <% unless @game.new_record? %>
             <div class="control-group">
               <%= f.label(:status, 'Status:', :class => 'control-label') %>
               <div class="controls">
-                <%= select(nil,:status, GameStatusEnum.all_except_created, :selected => @game.status)%>
+                <%= select(nil,:status, GameStatusEnum.all, :selected => @game.status)%>
               </div>
             </div>
         <% end %>
@@ -44,4 +46,3 @@
     </p>
 <% end %>
 <%= link_to 'Back to games', games_path %>
-

@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fussball Manager Api Documentation | <%= content_for?(:title) ? yield(:title) : "" %></title>
+  <title>Fussball Manager Api Documentation<%= content_for?(:title) ? ' | ' + yield(:title) : '' %></title>
   <meta name="description" content="">
   <meta name="author" content="">
-  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'application', :media => 'all' %>
   <%= yield(:head) %>
 </head>
 <body>
   <%= yield %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  <%= javascript_include_tag 'application' %>
 </body>
 </html>

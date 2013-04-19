@@ -23,10 +23,15 @@
 .teamBlue {background-color:#6c91ff; color:white;}
 .teamRed {background-color:#9c4c42; color:white;}
 
-@media all and (mix-width: 1281px) {
-  body {
-    padding: 20px;
-  }
+body {
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.container-fluid {
+  padding:0;
 }
 
 .footer {
