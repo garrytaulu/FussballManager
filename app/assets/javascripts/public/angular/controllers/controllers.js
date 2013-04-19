@@ -202,12 +202,8 @@ function GameDetailCtrl($scope, $routeParams, Game, Score, ApiUtility) {
     $scope.changeToStatus = function(newStatus) {
         var game = angular.copy($scope.game);
         game.status = newStatus;
-        ApiUtility.upsert(game, function(type) {
-            if (type == 'create') {
-//                $scope.games.push(game);
-            } else {
-                $scope.game = game;
-            }
+        ApiUtility.upsert(game, function() {
+            $scope.game = game;
         });
     };
 } GameDetailCtrl.$inject = ['$scope', '$routeParams', 'Game', 'Score', 'ApiUtility'];

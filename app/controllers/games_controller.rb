@@ -81,11 +81,10 @@ class GamesController < ApplicationController
     @game.redDefender = Player.find(params[:redDefender][:id])
 
 
-    if @game.status != GameStatusEnum.created &&
-        params[:status] == GameStatusEnum.created
+    if @game.status == GameStatusEnum.finished
 
       respond_to do |format|
-        message = "Can't set status back to 'created'"
+        message = "Can't set status once the game status is 'finished'"
         format.html do
           render :status => :conflict, :text => message
         end
