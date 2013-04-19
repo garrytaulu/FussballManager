@@ -12,8 +12,8 @@
  *= require_tree .
  */
 
-@import "bootstrap";
-@import "bootstrap-responsive";
+@import "twitter/bootstrap.css.scss";
+@import "twitter/bootstrap/responsive";
 
 /*form label { display: inline-block; width: 80px; }*/
 .container { display: inline-block; vertical-align: top; padding: 10px; }

@@ -9,15 +9,26 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
  */
 
-@import "bootstrap";
-@import "bootstrap-responsive";
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins";
+@import "twitter/bootstrap/reset";
+@import "twitter/bootstrap/scaffolding";
+@import "twitter/bootstrap/grid";
+@import "twitter/bootstrap/layouts";
+@import "twitter/bootstrap/type";
+@import "twitter/bootstrap/forms";
+@import "twitter/bootstrap/tables";
+@import "twitter/bootstrap/alerts";
+@import "twitter/bootstrap/buttons";
+@import "twitter/bootstrap/close";
+@import "twitter/bootstrap/navs";
+@import "twitter/bootstrap/utilities";
+@import "twitter/bootstrap/responsive";
 
 body {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 20px;
   max-width: 1280px;
   margin: 0 auto;
 }

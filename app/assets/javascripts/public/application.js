@@ -13,7 +13,7 @@
 //= require ./main
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
+//= require twitter/bootstrap
 //= require angular
 //= require angular-resource
 //= require ./angular/app
