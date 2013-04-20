@@ -23,7 +23,7 @@
       <tbody>
       <% @players.each do |player| %>
           <tr>
-            <td><%= player.id %></td>
+            <td><%= link_to player.id, player_path(player) %></td>
             <td><%= player.name %></td>
             <td><%= player.nickname %></td>
             <td><%= player.avatar %></td>

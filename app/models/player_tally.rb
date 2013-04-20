@@ -1,4 +1,6 @@
 class PlayerTally
+  include ActiveModel::Serializers::JSON
+
   attr_accessor :totalGoalsScored, :totalGoalsAttacking, :totalGoalsDefending,
                 :totalGamesPlayed, :totalGamesAttacking, :totalGamesDefending,
                 :totalOwnGoals, :totalOwnGoalsAttacking, :totalOwnGoalsDefending
@@ -52,5 +54,25 @@ class PlayerTally
     self.totalOwnGoals = self.totalOwnGoalsAttacking + self.totalOwnGoalsDefending
     self.totalGoalsScored = self.totalGoalsDefending + self.totalGoalsAttacking
     self.totalGamesPlayed = self.totalGamesAttacking + self.totalGamesDefending
+  end
+
+  def attributes
+    {
+        :totalGoalsScored => self.totalGoalsScored,
+        :totalGoalsAttacking => self.totalGoalsAttacking,
+        :totalGoalsDefending => self.totalGoalsDefending,
+        :totalGamesPlayed => self.totalGamesPlayed,
+        :totalGamesAttacking => self.totalGamesAttacking,
+        :totalGamesDefending => self.totalGamesDefending,
+        :totalOwnGoals => self.totalOwnGoals,
+        :totalOwnGoalsAttacking => self.totalOwnGoalsAttacking,
+        :totalOwnGoalsDefending => self.totalOwnGoalsDefending
+    }.inject({}){|memo,(k,v)| memo[k.to_s] = v; memo} # convert keys to string for json
+  end
+
+  def as_json(options = {})
+    ParamHelper.handle_only_param(options)
+
+    serializable_hash(options)
   end
 end

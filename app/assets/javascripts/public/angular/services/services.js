@@ -10,8 +10,8 @@ angular.module('fm.services', ['ngResource'])
      * $resource
      */
     .factory('Player', ['$resource', function($resource){
-        return $resource(
-            Globals.apiBaseUri + 'api/players/:id'
+        var self = $resource(
+            Globals.apiBaseUri + 'players/:id'
             , {id: '@id'}
             , {
                 'get'   : { method:'GET' },
@@ -21,27 +21,62 @@ angular.module('fm.services', ['ngResource'])
                 'delete': { method:'DELETE' }
             }
         );
+
+        /**
+         * Main service that communicates with tallies sub resource of player.
+         */
+        self.tally = $resource(
+            Globals.apiBaseUri + 'players/:id/tallies'
+            , {id: '@id'}
+            , {
+                'get': {
+                    method: 'GET', params: {
+                        //only: 'param1,param2'
+                    }
+                }
+            }
+        );
+
+        return self;
     }])
 
-    /**
-     * Main service that communicates with the Game API resource.
-     *
-     * Dependencies:
-     *
-     * $resource
-     */
+        /**
+         * Main service that communicates with the Game API resource.
+         *
+         * Dependencies:
+         *
+         * $resource
+         */
         .factory('Game', ['$resource', function($resource){
-            return $resource(
-                Globals.apiBaseUri + 'api/games/:id'
+
+            var self = $resource(
+                Globals.apiBaseUri + 'games/:id'
                 , {id: '@id'}
                 , {
-                    'get'   : { method:'GET' },
-                    'create': { method:'POST' },
-                    'update': { method:'PUT' },
-                    'query' : { method:'GET', isArray:true },
-                    'delete': { method:'DELETE' }
+                    'get'   : { method: 'GET' },
+                    'create': { method: 'POST' },
+                    'update': { method: 'PUT' },
+                    'query' : { method: 'GET', isArray:true },
+                    'delete': { method: 'DELETE' }
                 }
             );
+
+            /**
+             * Main service that communicates with tallies sub resource of game.
+             */
+            self.tally = $resource(
+                Globals.apiBaseUri + 'games/:id/tallies'
+                , {id: '@id'}
+                , {
+                    'get': {
+                        method: 'GET', params: {
+                            only: 'blueTeamTotal,redTeamTotal'
+                        }
+                    }
+                }
+            );
+
+            return self;
         }])
 
     /**
@@ -53,7 +88,7 @@ angular.module('fm.services', ['ngResource'])
      */
     .factory('Score', ['$resource', function($resource){
         return $resource(
-            Globals.apiBaseUri + 'api/games/:game/scores/:id'
+            Globals.apiBaseUri + 'games/:game/scores/:id'
             , {game:'@game.id', id: '@id'}
             , {
                 'get'   : { method:'GET' },

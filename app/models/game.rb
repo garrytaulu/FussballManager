@@ -1,4 +1,5 @@
 class Game < ActiveRecord::Base
+  attr_accessor :blueTeamScore, :redTeamScore
   attr_accessible :id, :blueAttacker, :blueDefender, :redAttacker, :redDefender, :status
 
   validates_inclusion_of :status, :in => %w(created started paused finished)
@@ -14,7 +15,7 @@ class Game < ActiveRecord::Base
   def players_are_valid
 
     !(self.blueAttacker == self.redAttacker ||
-      self.blueAttacker == self.redDefender ||
+      self.blueAttacker == self.redDefendxer ||
 
       self.blueDefender == self.redAttacker ||
       self.blueDefender == self.redDefender ||

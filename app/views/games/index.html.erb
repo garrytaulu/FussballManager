@@ -25,7 +25,7 @@
       <tbody>
       <% @games.each do |game| %>
           <tr>
-            <td><%= game.id %></td>
+            <td><%= link_to game.id, game_path(game) %></td>
             <td><%= game.blueAttacker && game.blueAttacker.name || '' %></td>
             <td><%= game.blueDefender && game.blueDefender.name || '' %></td>
             <td><%= game.redAttacker && game.redAttacker.name || '' %></td>

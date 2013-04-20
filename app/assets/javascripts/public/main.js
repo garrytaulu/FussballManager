@@ -1,3 +1,3 @@
 var Globals = Globals || {};
 
-Globals.apiBaseUri = "/";
+Globals.apiBaseUri = "/api/";

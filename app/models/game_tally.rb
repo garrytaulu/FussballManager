@@ -1,4 +1,6 @@
 class GameTally
+  include ActiveModel::Serializers::JSON
+
   attr_accessor :blueTeamTotal, :redTeamTotal, :blueAttackerTotal, :blueDefenderTotal,
                 :redAttackerTotal, :redDefenderTotal, :timeTaken, :blueAttackerOwnGoalsTotal,
                 :blueDefenderOwnGoalsTotal, :redAttackerOwnGoalsTotal, :redDefenderOwnGoalsTotal,
@@ -76,5 +78,29 @@ class GameTally
 
       self.timeTaken = hours + ':' + minutes + ':' + seconds
     end
+  end
+
+  def attributes
+    {
+        :blueTeamTotal => self.blueTeamTotal,
+        :redTeamTotal => self.redTeamTotal,
+        :blueAttackerTotal => self.blueAttackerTotal,
+        :blueDefenderTotal => self.blueDefenderTotal,
+        :redAttackerTotal => self.redAttackerTotal,
+        :redDefenderTotal => self.redDefenderTotal,
+        :timeTaken => self.timeTaken,
+        :blueAttackerOwnGoalsTotal => self.blueAttackerOwnGoalsTotal,
+        :blueDefenderOwnGoalsTotal => self.blueDefenderOwnGoalsTotal,
+        :redAttackerOwnGoalsTotal => self.redAttackerOwnGoalsTotal,
+        :redDefenderOwnGoalsTotal => self.redDefenderOwnGoalsTotal,
+        :blueTeamOwnGoalsTotal => self.blueTeamOwnGoalsTotal,
+        :redTeamOwnGoalsTotal => self.redTeamOwnGoalsTotal
+    }.inject({}){|memo,(k,v)| memo[k.to_s] = v; memo} # convert keys to string for json
+  end
+
+  def as_json(options = {})
+    ParamHelper.handle_only_param(options)
+
+    serializable_hash(options)
   end
 end
