@@ -15,7 +15,7 @@ class Game < ActiveRecord::Base
   def players_are_valid
 
     !(self.blueAttacker == self.redAttacker ||
-      self.blueAttacker == self.redDefendxer ||
+      self.blueAttacker == self.redDefender ||
 
       self.blueDefender == self.redAttacker ||
       self.blueDefender == self.redDefender ||
@@ -25,5 +25,13 @@ class Game < ActiveRecord::Base
 
       self.redDefender == self.blueAttacker ||
       self.redDefender == self.blueDefender)
+  end
+
+  def as_json(options={})
+    hash = super(options)
+    hash.merge({
+                   :blueTeamScore => self.blueTeamScore,
+                   :redTeamScore => self.redTeamScore
+               })
   end
 end

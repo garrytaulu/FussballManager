@@ -5,6 +5,15 @@ class GamesController < ApplicationController
   def index
     @games = Game.all(:order => 'id')
 
+    @games.each do |game|
+
+      scores = Score.find_all_by_game(game.id)
+      tally = GameTally.new(scores)
+      game.blueTeamScore = tally.blueTeamTotal
+      game.redTeamScore = tally.redTeamTotal
+
+    end
+
     respond_with @games
   end
 
@@ -12,6 +21,11 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     @game = Game.find(params[:id])
+
+    scores = Score.find_all_by_game(params[:id])
+    tally = GameTally.new(scores)
+    @game.blueTeamScore = tally.blueTeamTotal
+    @game.redTeamScore = tally.redTeamTotal
 
     respond_with @game
   end

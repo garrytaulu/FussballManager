@@ -18,6 +18,8 @@
         <th>Blue Defender</th>
         <th>Red Attacker</th>
         <th>Red Defender</th>
+        <th>Blue Teams Score</th>
+        <th>Red Teams Score</th>
         <th>Status</th>
         <th></th>
       </tr>
@@ -30,6 +32,8 @@
             <td><%= game.blueDefender && game.blueDefender.name || '' %></td>
             <td><%= game.redAttacker && game.redAttacker.name || '' %></td>
             <td><%= game.redDefender && game.redDefender.name || '' %></td>
+            <td><%= game.blueTeamScore %></td>
+            <td><%= game.redTeamScore %></td>
             <td><%= game.status %></td>
             <td>
               <%= link_to 'Scores', game_scores_path(game), :class => 'btn btn-mini' %>

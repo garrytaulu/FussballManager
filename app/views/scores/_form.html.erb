@@ -9,7 +9,7 @@
     <div class="control-group">
       <div class="controls">
         <label class="checkbox">
-          <%= f.check_box :own_goal %> Own goal?
+          <%= check_box(nil, :own_goal, :checked => @score.own_goal) %> Own goal?
         </label>
       </div>
     </div>
