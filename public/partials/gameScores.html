@@ -1,23 +1,35 @@
 <div class="container" ng-cloak>
 
     <div class="fluid-row">
-        <div class="span4 well well-small">
-            <span>Status: {{ game.status }}</span>
-        </div>
+        <div class="span12 well well-small">
 
-        <div class="span8">
-            <a class="btn btn-small" ng-click="changeToStatus('started')" ng-show="game.status == 'created'"><i class="icon-play"></i> Start game</a>
-            <a class="btn btn-small" ng-click="changeToStatus('created')" ng-show="game.status == 'started'"><i class="icon-repeat"></i> Reset game</a>
-            <a class="btn btn-small" ng-click="changeToStatus('paused')" ng-show="game.status == 'started'"><i class="icon-pause"></i> Pause game</a>
-            <a class="btn btn-small" ng-click="changeToStatus('started')" ng-show="game.status == 'paused'"><i class="icon-play"></i> Resume game</a>
-            <a class="btn btn-small btn-danger" ng-click="changeToStatus('finished')" ng-show="game.status != 'finished'"><i class="icon-lock"></i> Finish game</a>
-        </div>
+            <span>Status: <span class="badge">{{ game.status }}</span></span>
 
-    </div>
+            <div class="input-prepend input-append btn-fixStatusButtonsMargin" ng-show="game.status == 'created'">
+                <a class="btn btn-small" ng-click="changeToStatus('paused')"><i class="icon-play"></i></a>
+                <a class="btn btn-small hidden-phone" ng-click="changeToStatus('started')">Start game</a>
+            </div>
 
-    <div class="fluid-row">
-        <div class="span12">
-            <br />
+            <div class="input-prepend input-append btn-fixStatusButtonsMargin" ng-show="game.status == 'started'">
+                <a class="btn btn-small" ng-click="changeToStatus('paused')"><i class="icon-repeat"></i></a>
+                <a class="btn btn-small hidden-phone" ng-click="changeToStatus('created')">Reset game</a>
+            </div>
+
+            <div class="input-prepend input-append btn-fixStatusButtonsMargin" ng-show="game.status == 'started'">
+                <a class="btn btn-small" ng-click="changeToStatus('paused')"><i class="icon-pause"></i></a>
+                <a class="btn btn-small hidden-phone" ng-click="changeToStatus('paused')">Pause game</a>
+            </div>
+
+            <div class="input-prepend input-append btn-fixStatusButtonsMargin" ng-show="game.status == 'paused'">
+                <a class="btn btn-small" ng-click="changeToStatus('started')"><i class="icon-play"></i></a>
+                <a class="btn btn-small hidden-phone" ng-click="changeToStatus('started')">Resume game</a>
+            </div>
+
+            <div class="input-prepend input-append btn-fixStatusButtonsMargin" ng-show="game.status != 'finished'">
+                <a class="btn btn-small btn-danger" ng-click="changeToStatus('finished')"><i class="icon-lock"></i></a>
+                <a class="btn btn-small btn-danger hidden-phone" ng-click="changeToStatus('finished')">Finish game</a>
+            </div>
+
         </div>
     </div>
 
@@ -26,13 +38,27 @@
             <div>
                 <span class="btn btn-large btn-info btn-createScore" ng-click="create(game.blueAttacker)">{{ game.blueAttacker.nickname }}</span>
                 <span class="btn btn-large btn-info btn-createScore" ng-click="create(game.blueDefender)">{{ game.blueDefender.nickname }}</span>
-                <span class="btn btn-large btn-info">{{ game.blueTeamScore }}</span>
+                <span class="btn btn-large btn-info disabled">{{ game.blueTeamScore }}</span>
             </div>
             <div>
                 <span class="btn btn-large btn-danger btn-createScore" ng-click="create(game.redAttacker)">{{ game.redAttacker.nickname }}</span>
                 <span class="btn btn-large btn-danger btn-createScore" ng-click="create(game.redDefender)">{{ game.redDefender.nickname }}</span>
-                <span class="btn btn-large btn-danger">{{ game.redTeamScore }}</span>
+                <span class="btn btn-large btn-danger disabled">{{ game.redTeamScore }}</span>
+            </div>
+        </div>
+    </div>
 
+    <div class="fluid-row" ng-show="game.status != 'started'">
+        <div class="span12">
+            <div>
+                <span class="btn btn-large btn-info btn-createScore disabled">{{ game.blueAttacker.nickname }}</span>
+                <span class="btn btn-large btn-info btn-createScore disabled">{{ game.blueDefender.nickname }}</span>
+                <span class="btn btn-large btn-info disabled">{{ game.blueTeamScore }}</span>
+            </div>
+            <div>
+                <span class="btn btn-large btn-danger btn-createScore disabled">{{ game.redAttacker.nickname }}</span>
+                <span class="btn btn-large btn-danger btn-createScore disabled">{{ game.redDefender.nickname }}</span>
+                <span class="btn btn-large btn-danger disabled">{{ game.redTeamScore }}</span>
             </div>
         </div>
     </div>
