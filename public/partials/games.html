@@ -33,15 +33,14 @@
 
     <br/>
 
-    <table class="table table-striped table-bordered table-condensed" cellspacing="0" cellpadding="3" border="0">
+    <table class="table table-striped table-bordered table-condensed">
         <thead>
             <tr>
                 <td>#</td>
                 <td>Blue Team</td>
+                <td class="alignCenter">Score</td>
                 <td>Red Team</td>
-                <td>Played on</td>
                 <td>Status</td>
-                <td>Score</td>
                 <td>Actions</td>
             </tr>
         </thead>
@@ -51,15 +50,45 @@
                     <span>{{ $index + 1 }}.</span>
                     <span class="resourceId">{{ game.id }}</span>
                 </td>
-                <td>{{ game | gameBlueTeamDisplay }}</td>
-                <td>{{ game | gameRedTeamDisplay }}</td>
-                <td>{{ game.created_at }}</td>
-                <td>{{ game.status }}</td>
-                <td>//TODO</td>
+
                 <td>
-                    <span><a title="Edit" href="" ng-click="edit($index)">Edit</a></span>
-                    <span>|</span>
-                    <span><a title="Scores" href="#/games/{{ game.id }}">Scores</a></span>
+                    <span class="badge badge-info">{{ game | gameBlueTeamDisplay }}</span>
+                </td>
+
+                <td class="alignCenter" ng-show="game.status == 'created'">
+                    <span class="badge">-</span>
+                    <span>:</span>
+                    <span class="badge">-</span>
+                </td>
+                <td class="alignCenter" ng-show="game.status != 'created'">
+                    <span class="badge badge-info">{{ game.blueTeamScore }}</span>
+                    <span>:</span>
+                    <span class="badge badge-important">{{ game.redTeamScore }}</span>
+                </td>
+
+                <td>
+                    <span class="badge badge-important">{{ game | gameRedTeamDisplay }}</span>
+                </td>
+
+                <td>
+                    <span ng-show="game.status == 'created'"><i title="not started" class="icon-question-sign"></i></span>
+                    <span ng-show="game.status == 'started'"><i title="started" class="icon-play"></i></span>
+                    <span ng-show="game.status == 'paused'"><i title="paused" class="icon-pause"></i></span>
+                    <span ng-show="game.status == 'finished'"><i title="finished" class="icon-ok"></i></span>
+                    <span>
+                        {{ game.updated_at | date:'MMM dd HH:mm' }}
+                    </span>
+                </td>
+
+                <td>
+                    <span>
+                        <a class="btn btn-mini btn-primary" title="Goals" href="#/games/{{ game.id }}">
+                            <i class="icon-flag icon-white"></i> Goals
+                        </a>
+                    </span>
+                    <span ng-show="game.status == 'created'">
+                        <a class="btn btn-mini" title="Edit" href="" ng-click="edit($index)"><i class="icon-edit"></i> Edit</a>
+                    </span>
                 </td>
             </tr>
         </tbody>

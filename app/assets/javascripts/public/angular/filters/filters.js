@@ -11,7 +11,7 @@ angular.module('fm.filters', [])
             var result = "";
 
             if (angular.isDefined(game)) {
-                result = "A: " + game.blueAttacker.name + " / D: " + game.blueDefender.name;
+                result = game.blueAttacker.name + " : " + game.blueDefender.name;
             }
 
             return result;
@@ -28,7 +28,25 @@ angular.module('fm.filters', [])
             var result = "";
 
             if (angular.isDefined(game)) {
-                result = "A: " + game.redAttacker.name + " / D: " + game.redDefender.name;
+                result = game.redAttacker.name + " : " + game.redDefender.name;
+            }
+
+            return result;
+        };
+    }])
+
+    /**
+     * Returns the game result in one of the following formats:
+     *
+     */
+    .filter('gameDate', [function() {
+        return function(game) {
+            var result = "";
+
+            if (angular.isDefined(game)) {
+                var lastStatus = new Date(game.updated_at);
+//                result = lastStatus.toString('ddd, yyyy-MM-dd');
+//                result = $filter('date')(lastStatus, 'ddd, yyyy-MM-dd');
             }
 
             return result;
