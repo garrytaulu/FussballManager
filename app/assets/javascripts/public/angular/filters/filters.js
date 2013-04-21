@@ -72,11 +72,12 @@ angular.module('fm.filters', [])
 
                 score.team = isForBlueTeam ? 'blue' : 'red';
 
-                result = score.player.nickname + " scored for " + score.team + " team";
+                result = score.player.nickname + " scored for";
+//                result = score.player.nickname + " scored for " + score.team + " team";
 
-                if (score.own_goal) {
-                    result += " (own goal)";
-                }
+//                if (score.own_goal) {
+//                    result += " (own goal)";
+//                }
             }
 
             return result;

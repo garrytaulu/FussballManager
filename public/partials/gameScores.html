@@ -1,16 +1,18 @@
-<div class="container">
+<div class="container" ng-cloak>
 
     <div class="fluid-row">
-        <div class="span8">
-            <a class="btn btn-medium" ng-click="changeToStatus('started')" ng-show="game.status == 'created'"><i class="icon-play"></i> Start game</a>
-            <a class="btn btn-medium" ng-click="changeToStatus('created')" ng-show="game.status == 'started'"><i class="icon-repeat"></i> Reset game</a>
-            <a class="btn btn-medium" ng-click="changeToStatus('paused')" ng-show="game.status == 'started'"><i class="icon-pause"></i> Pause game</a>
-            <a class="btn btn-medium" ng-click="changeToStatus('started')" ng-show="game.status == 'paused'"><i class="icon-play"></i> Resume game</a>
-            <a class="btn btn-medium" ng-click="changeToStatus('finished')" ng-show="game.status != 'finished'"><i class="icon-stop"></i> Finish game</a>
-        </div>
-        <div class="span4">
+        <div class="span4 well well-small">
             <span>Status: {{ game.status }}</span>
         </div>
+
+        <div class="span8">
+            <a class="btn btn-small" ng-click="changeToStatus('started')" ng-show="game.status == 'created'"><i class="icon-play"></i> Start game</a>
+            <a class="btn btn-small" ng-click="changeToStatus('created')" ng-show="game.status == 'started'"><i class="icon-repeat"></i> Reset game</a>
+            <a class="btn btn-small" ng-click="changeToStatus('paused')" ng-show="game.status == 'started'"><i class="icon-pause"></i> Pause game</a>
+            <a class="btn btn-small" ng-click="changeToStatus('started')" ng-show="game.status == 'paused'"><i class="icon-play"></i> Resume game</a>
+            <a class="btn btn-small btn-danger" ng-click="changeToStatus('finished')" ng-show="game.status != 'finished'"><i class="icon-lock"></i> Finish game</a>
+        </div>
+
     </div>
 
     <div class="fluid-row">
@@ -22,12 +24,15 @@
     <div class="fluid-row" ng-show="game.status == 'started'">
         <div class="span12">
             <div>
-                <button class="teamBlue gameScore" ng-click="create(game.blueAttacker)">{{ game.blueAttacker.nickname }}</button>
-                <button class="teamBlue gameScore" ng-click="create(game.blueDefender)">{{ game.blueDefender.nickname }}</button>
+                <span class="btn btn-large btn-info btn-createScore" ng-click="create(game.blueAttacker)">{{ game.blueAttacker.nickname }}</span>
+                <span class="btn btn-large btn-info btn-createScore" ng-click="create(game.blueDefender)">{{ game.blueDefender.nickname }}</span>
+                <span class="btn btn-large btn-info">{{ game.blueTeamScore }}</span>
             </div>
             <div>
-                <button class="teamRed gameScore" ng-click="create(game.redAttacker)">{{ game.redAttacker.nickname }}</button>
-                <button class="teamRed gameScore" ng-click="create(game.redDefender)">{{ game.redDefender.nickname }}</button>
+                <span class="btn btn-large btn-danger btn-createScore" ng-click="create(game.redAttacker)">{{ game.redAttacker.nickname }}</span>
+                <span class="btn btn-large btn-danger btn-createScore" ng-click="create(game.redDefender)">{{ game.redDefender.nickname }}</span>
+                <span class="btn btn-large btn-danger">{{ game.redTeamScore }}</span>
+
             </div>
         </div>
     </div>
@@ -76,8 +81,21 @@
             <ol>
                 <li ng-repeat="score in gameScores">
                     <div>
-                        {{score | scoreDisplay }}
-                        <a title="Edit" href="" ng-click="edit($index)">Edit</a>
+                        <span ng-show="game.status != 'finished'">
+                            <a class="btn btn-mini" title="Edit" href="" ng-click="edit($index)"><i class="icon-edit"></i> Edit</a>
+                        </span>
+                        {{ score | scoreDisplay }}
+
+                        <span ng-show="score.team == 'blue'">
+                            <span class="badge badge-info">blue team</span>
+                        </span>
+                        <span ng-show="score.team == 'red'">
+                            <span class="badge badge-important">red team</span>
+                        </span>
+
+                        <span ng-show="score.own_goal">
+                            (own goal)
+                        </span>
                     </div>
                 </li>
             </ol>
