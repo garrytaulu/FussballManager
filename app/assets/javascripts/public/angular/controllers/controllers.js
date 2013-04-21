@@ -11,12 +11,13 @@ function MainCtrl($scope, Player, Game) {
     Game.query(function(result) {
         $scope.games = result;
     });
-    $scope.updateGames = function(updatedGame) {
-        var index = $scope.games.indexOf(updatedGame);
-        if (index > -1) {
-            $scope.games[index] = updatedGame;
-        }
-    }
+
+//    $scope.updateGames = function(updatedGame) {
+//        var index = $scope.games.indexOf(updatedGame);
+//        if (index > -1) {
+//            $scope.games[index] = updatedGame;
+//        }
+//    }
 } MainCtrl.$inject = ['$scope', 'Player', 'Game'];
 
 /**
@@ -90,6 +91,10 @@ function GamesCtrl($scope, Player, Game, ApiUtility) {
 
     $scope.master = {};
     $scope.gameEdit = null;
+
+    Game.query(function(result) {
+        $scope.games = result;
+    });
 
     // Fill in the available players
     Player.query(function(players) {
@@ -191,13 +196,13 @@ function GameDetailCtrl($scope, $routeParams, Game, Score, ApiUtility) {
             if (type == 'create') {
                 $scope.gameScores.push(score);
                 $scope.game = score.game;
-                $scope.updateGames(score.game);
+                $scope.updateGame();
             } else {
                 var index = $scope.gameScores.indexOf($scope.master);
                 if (index > -1) {
                     $scope.gameScores[index] = score;
                     $scope.game = score.game;
-                    $scope.updateGames(score.game);
+                    $scope.updateGame();
                 }
             }
 
@@ -214,9 +219,20 @@ function GameDetailCtrl($scope, $routeParams, Game, Score, ApiUtility) {
 
         game.status = newStatus;
         ApiUtility.upsert(game, function() {
-            $scope.game = game;
+            $scope.updateGame();
         });
     };
+
+    $scope.updateGame = function() {
+        // get the selected game
+        Game.get({id: $routeParams.game}, function(game) {
+            $scope.game = game;
+        });
+
+//        $scope.updateGames($scope.game);
+    }
+
+
 } GameDetailCtrl.$inject = ['$scope', '$routeParams', 'Game', 'Score', 'ApiUtility'];
 
 function HomeCtrl($scope) {
