@@ -8,6 +8,14 @@ FussballManager::Application.routes.draw do
       resources :scores
       get :tallies, :to => 'tallies#game_index'
     end
+
+    scope 'response' do
+      get 'player', :to => 'response#player'
+      get 'game', :to => 'response#game'
+      get 'score', :to => 'response#score'
+      get 'player-tally', :to => 'response#player_tally'
+      get 'game-tally', :to => 'response#game_tally'
+    end
   end
 
   match '/api', :to => 'api_index#index'

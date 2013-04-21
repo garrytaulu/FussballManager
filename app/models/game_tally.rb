@@ -6,7 +6,7 @@ class GameTally
                 :blueDefenderOwnGoalsTotal, :redAttackerOwnGoalsTotal, :redDefenderOwnGoalsTotal,
                 :blueTeamOwnGoalsTotal, :redTeamOwnGoalsTotal
 
-  def initialize(scores)
+  def initialize(scores = [])
 
     # initialize properties with defaults
     self.blueTeamTotal             = 0

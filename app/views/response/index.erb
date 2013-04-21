@@ -1,0 +1,17 @@
+<h4>Object Properties</h4>
+<table class="table table-bordered">
+  <thead>
+  <th>Property</th>
+  <th>Type</th>
+  </thead>
+  <tbody>
+  <% @properties.each do |f| %>
+      <tr>
+        <td><%= f[0] %></td>
+        <td><%= get_type f[1] %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<h4>JSON Example</h4>
+<pre><%= @json %></pre>

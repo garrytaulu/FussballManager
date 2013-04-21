@@ -5,7 +5,7 @@ class PlayerTally
                 :totalGamesPlayed, :totalGamesAttacking, :totalGamesDefending,
                 :totalOwnGoals, :totalOwnGoalsAttacking, :totalOwnGoalsDefending
 
-  def initialize(player, scores)
+  def initialize(player = nil, scores = [])
 
     # initialize properties with defaults
     self.totalGoalsScored       = 0

@@ -19,4 +19,18 @@ module ApplicationHelper
         :required => required
     )
   end
+
+  def get_type(object)
+    if object.kind_of?(Fixnum)
+      return 'Integer'
+    end
+
+    if object.kind_of?(Class)
+      object.name
+    else
+      object.class.name
+    end
+
+
+  end
 end
