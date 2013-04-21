@@ -25,6 +25,9 @@
 @import "twitter/bootstrap/close";
 @import "twitter/bootstrap/navs";
 @import "twitter/bootstrap/utilities";
+@import "twitter/bootstrap/modals";
+@import "twitter/bootstrap/component-animations";
+@import "twitter/bootstrap/code";
 @import "twitter/bootstrap/responsive";
 
 body {
@@ -96,4 +99,8 @@ table.last-with-buttons.two tr td:last-child {
 
 .button-wrapper {
   margin-bottom: 4px;
+}
+
+.modal-body {
+  min-height: 400px;
 }
