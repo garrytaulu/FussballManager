@@ -6,12 +6,12 @@
             <span>Status: <span class="badge">{{ game.status }}</span></span>
 
             <div class="input-prepend input-append btn-fixStatusButtonsMargin" ng-show="game.status == 'created'">
-                <a class="btn btn-small" ng-click="changeToStatus('paused')"><i class="icon-play"></i></a>
+                <a class="btn btn-small" ng-click="changeToStatus('started')"><i class="icon-play"></i></a>
                 <a class="btn btn-small hidden-phone" ng-click="changeToStatus('started')">Start game</a>
             </div>
 
             <div class="input-prepend input-append btn-fixStatusButtonsMargin" ng-show="game.status == 'started'">
-                <a class="btn btn-small" ng-click="changeToStatus('paused')"><i class="icon-repeat"></i></a>
+                <a class="btn btn-small" ng-click="changeToStatus('created')"><i class="icon-repeat"></i></a>
                 <a class="btn btn-small hidden-phone" ng-click="changeToStatus('created')">Reset game</a>
             </div>
 
