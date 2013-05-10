@@ -1,0 +1,21 @@
+<div class="wall-category">
+    <div class="title">{{ category.categoryTitle }}</div>
+
+    <div ng-repeat="person in category.people">
+        <div class="wall-frame">
+            <div class="row-fluid">
+                <div class="span2">
+                    <!--<div class="wall-person">{{ person.img }}</div>-->
+                    <div class="wall-person"></div>
+                </div>
+                <div class="span8">
+                    <div class="title">{{ person.nickname }}</div>
+                    <i>{{ person.quote }}</i>
+                </div>
+                <div class="span2" style="padding-right:5px;">
+                    <h3 class="pull-right">{{ person.value }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

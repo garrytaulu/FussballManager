@@ -1,4 +1,24 @@
-<div class="container">
-    <h2>Home</h2>
-    <div>Home partial</div>
+<div class="container-fluid">
+
+    <div class="row-fluid">
+        <div class="span5">
+            <h4>Wall Of Fame</h4>
+
+            <div ng-repeat="category in fameCategories">
+                <wall-categories></wall-categories>
+            </div>
+        </div>
+
+        <div class="span2">
+        </div>
+
+        <div class="span5">
+            <h4>Wall Of Shame</h4>
+
+            <div ng-repeat="category in shameCategories">
+                <wall-categories></wall-categories>
+            </div>
+        </div>
+    </div>
+
 </div>

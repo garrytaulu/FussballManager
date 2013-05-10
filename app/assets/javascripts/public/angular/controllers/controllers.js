@@ -4,20 +4,20 @@ function MainCtrl($scope, Player, Game) {
     $scope.players = [];
     $scope.games = [];
 
-    Player.query(function(result) {
-        $scope.players = result;
-    });
+    $scope.fameCategories  = [];
+    $scope.shameCategories = [];
 
-    Game.query(function(result) {
-        $scope.games = result;
-    });
+    $scope.fameCategories  = wallFameCategories;
+    $scope.shameCategories = wallShameCategories;
 
-//    $scope.updateGames = function(updatedGame) {
-//        var index = $scope.games.indexOf(updatedGame);
-//        if (index > -1) {
-//            $scope.games[index] = updatedGame;
-//        }
-//    }
+//    Player.query(function(result) {
+//        $scope.players = result;
+//    });
+
+//    Game.query(function(result) {
+//        $scope.games = result;
+//    });
+
 } MainCtrl.$inject = ['$scope', 'Player', 'Game'];
 
 /**
@@ -27,6 +27,10 @@ function PlayersCtrl($scope, Player, ApiUtility) {
 
     $scope.master = {};
     $scope.playerEdit = null;
+
+    Player.query(function(result) {
+        $scope.players = result;
+    });
 
     $scope.create = function() {
         $scope.playerEdit = new Player();
