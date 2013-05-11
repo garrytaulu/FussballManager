@@ -8,6 +8,11 @@ FussballManager::Application.routes.draw do
       resources :scores
       get :tallies, :to => 'tallies#game_index'
     end
+    resource :walls do
+      collection do
+        get 'index'
+      end
+    end
 
     scope 'response' do
       get 'player', :to => 'response#player'
