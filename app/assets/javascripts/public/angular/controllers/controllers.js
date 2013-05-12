@@ -7,17 +7,6 @@ function MainCtrl($scope, Player, Game) {
     $scope.fameCategories  = [];
     $scope.shameCategories = [];
 
-    $scope.fameCategories  = wallFameCategories;
-    $scope.shameCategories = wallShameCategories;
-
-//    Player.query(function(result) {
-//        $scope.players = result;
-//    });
-
-//    Game.query(function(result) {
-//        $scope.games = result;
-//    });
-
 } MainCtrl.$inject = ['$scope', 'Player', 'Game'];
 
 /**
@@ -239,6 +228,20 @@ function GameDetailCtrl($scope, $routeParams, Game, Score, ApiUtility) {
 
 } GameDetailCtrl.$inject = ['$scope', '$routeParams', 'Game', 'Score', 'ApiUtility'];
 
-function HomeCtrl($scope) {
-
-} HomeCtrl.$inject = ['$scope'];
+function HomeCtrl($scope, Wall) {
+    Wall.query(function(result) {
+        var wallFameCategories  = [];
+        var wallShameCategories = [];
+        result.forEach(function(elem, index)
+        {
+//            debugger;
+            if (elem.categoryType=='FAME'){
+                wallFameCategories[wallFameCategories.length] = elem;
+            } else if (elem.categoryType=='SHAME') {
+                wallShameCategories[wallShameCategories.length] = elem;
+            }
+        });
+        $scope.fameCategories  = wallFameCategories;
+        $scope.shameCategories = wallShameCategories;
+    });
+} HomeCtrl.$inject = ['$scope', 'Wall'];

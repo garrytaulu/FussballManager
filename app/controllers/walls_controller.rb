@@ -16,18 +16,18 @@ class WallsController < ApplicationController
     wallCat_LG_S_DEF = WallCategory.new('Least goals received as a defender', 'FAME', @people)
 
     # WALL OF SHAME CATEGORIES
-    @people = getPeopleFromResult(getMgReceivedDefQuery)
-    wallCat_MG_R_DEF = WallCategory.new('Least goals received as a defender', 'SHAME', @people)
-
     @people = getPeopleFromResult(getMogScoredQuery)
     wallCat_MOG = WallCategory.new('Most own goals scored', 'SHAME', @people)
+
+    @people = getPeopleFromResult(getMgReceivedDefQuery)
+    wallCat_MG_R_DEF = WallCategory.new('Most goals received as a defender', 'SHAME', @people)
 
     #append all generated categories to response object
     @wallFame.append(wallCat_MG_S_ATT)
     @wallFame.append(wallCat_MG_S_DEF)
     @wallFame.append(wallCat_LG_S_DEF)
-    @wallFame.append(wallCat_MG_R_DEF)
     @wallFame.append(wallCat_MOG)
+    @wallFame.append(wallCat_MG_R_DEF)
 
     respond_with @wallFame
   end

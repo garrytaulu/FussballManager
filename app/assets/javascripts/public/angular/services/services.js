@@ -101,6 +101,27 @@ angular.module('fm.services', ['ngResource'])
     }])
 
     /**
+     * Main service that communicates with the Walls API resource.
+     *
+     * Dependencies:
+     *
+     * $resource
+     */
+    .factory('Wall', ['$resource', function($resource){
+        return $resource(
+            Globals.apiBaseUri + 'walls/:id'
+            , {id: '@id'}
+            , {
+                'get'   : { method:'GET' },
+//                'create': { method:'POST' },
+//                'update': { method:'PUT' },
+                'query' : { method:'GET', isArray:true },
+//                'delete': { method:'DELETE' }
+            }
+        );
+    }])
+
+    /**
      * An api utility service with some handy methods for calling api resources.
      */
     .factory('ApiUtility', [function() {
@@ -134,4 +155,6 @@ angular.module('fm.services', ['ngResource'])
         };
 
         return self;
-    }]);
+    }])
+
+;
