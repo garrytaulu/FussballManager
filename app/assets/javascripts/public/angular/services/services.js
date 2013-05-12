@@ -113,10 +113,7 @@ angular.module('fm.services', ['ngResource'])
             , {id: '@id'}
             , {
                 'get'   : { method:'GET' },
-//                'create': { method:'POST' },
-//                'update': { method:'PUT' },
-                'query' : { method:'GET', isArray:true },
-//                'delete': { method:'DELETE' }
+                'query' : { method:'GET', isArray:true }
             }
         );
     }])
