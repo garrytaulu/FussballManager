@@ -3,7 +3,7 @@
 Fun project for the staff at Syple to experiment with new technologies. A basic web application that manages games played on a traditional Fussball table.
 
 The deployed application can be found at (subject to change):
-http://gemworld.herokuapp.com
+http://fussball-manager.herokuapp.com
 
 ## API Specification
 
